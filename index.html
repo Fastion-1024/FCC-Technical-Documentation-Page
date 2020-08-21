@@ -460,56 +460,325 @@
                 <header>
                     <h3>Classes and Objects</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        <em>Classes</em> are the most fundamental of C#’s types. A class is a data structure that combines state (fields) and actions (methods and other function members) in a single unit. A class provides a definition for <em>instances</em> of the class, also known as <em>objects</em>. Classes support <em>inheritance</em> and <em>polymorphism</em>, mechanisms whereby <em>derived classes</em> can extend and specialize <em>base classes</em>.
+                    </p>
+                    <p>
+                        New classes are created using class declarations. A class declaration starts with a header. The header specifies:
+                    </p>
+                    <ul>
+                        <li>The attributes and modifiers of the class</li>
+                        <li>The name of the class</li>
+                        <li>The base class (when inheriting from a <a href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/types#base-classes">base class</a>)</li>
+                        <li>The interfaces implemented by the class</li>
+                    </ul>
+                    <p>
+                        The header is followed by the class body, which consists of a list of member declarations written between the delimiters <code>{</code> and <code>}</code>.
+                    </p>
+                    <p>
+                        The following code shows a declaration of a simple class named <code>Point</code>:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">Point</span>
+{
+    <span class="code-keyword">public int</span> X { <span class="code-keyword">get</span>;}
+    <span class="code-keyword">public int</span> Y { <span class="code-keyword">get</span>;}
+
+    <span class="code-keyword">public</span> <span class="code-title">Point</span>(<span class="code-keyword">int</span> x, <span class="code-keyword">int</span> y) => (X, Y) = (x, y);
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Instances of classes are created using the <code>new</code> operator, which allocates memory for a new instance, invokes a constructor to initialize the instance, and returns a reference to the instance. The following statements create two <code>Point</code> objects and store references to those objects in two variables:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">var</span> p1 = <span class="code-keyword">new</span> Point(0, 0);
+<span class="code-keyword">var</span> p2 = <span class="code-keyword">new</span> Point(10, 20);
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The memory occupied by an object is automatically reclaimed when the object is no longer reachable. It's neither necessary nor possible to explicitly deallocate objects in C#.
+                    </p>
+                </article>
             </section>
 
             <section id="type-parameters">
                 <header>
                     <h3>Type Parameters</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Generic classes define <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/"><em><strong>type parameters</strong></em></a>. Type parameters are a list of type parameter names enclosed in angle brackets. Type parameters follow the class name. The type parameters can then be used in the body of the class declarations to define the members of the class. In the following example, the type parameters of <code>Pair</code> are <code>TFirst</code> and <code>TSecond</code>:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">Pair</span>&lt;<span class="code-title">TFirst</span>, <span class="code-title">TSecond</span>&gt;
+{
+    <span class="code-keyword">public</span> TFirst First { <span class="code-keyword">get</span>; }
+    <span class="code-keyword">public</span> TSecond Second { <span class="code-keyword">get</span>; }
+
+    <span class="code-keyword">public</span> <span class="code-title">Pair</span>(TFirst first, TSecond second) =>
+        (First, Second) = (first, second);
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        A class type that is declared to take type parameters is called a <em>generic class type</em>. Struct, interface, and delegate types can also be generic. When the generic class is used, type arguments must be provided for each of the type parameters:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">var</span> pair = <span class="code-keyword">new</span> Pair&lt;<span class="code-keyword">int</span>, <span class="code-keyword">string</span>&gt;(1, <span class="code-string">"two"</span>);
+<span class="code-keyword">int</span> i = pair.First;       <span class="code-comment">// TFirst int</span>
+<span class="code-keyword">string</span> s = pair.Second;   <span class="code-comment">// TSecond string</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        A generic type with type arguments provided, like <code>Pair&lt;int,string&gt;</code> above, is called a <em>constructed type</em>.
+                    </p>
+                </article>
             </section>
 
             <section id="base-classes">
                 <header>
                     <h3>Base Classes</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A class declaration may specify a base class. Follow the class name and type parameters with a colon and the name of the base class. Omitting a base class specification is the same as deriving from type <code>object</code>. In the following example, the base class of <code>Point3D</code> is <code>Point</code>. From the first example, the base class of <code>Point</code> is <code>object</code>:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">Point3D</span> : <span class="code-title">Point</span>
+{
+    <span class="code-keyword">public int</span> Z { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+
+    <span class="code-keyword">public</span> <span class="code-title">Point3D</span>(<span class="code-keyword">int</span> x, <span class="code-keyword">int</span> y, <span class="code-keyword">int</span> z) : <span class="code-title">base</span>(x, y)
+    {
+        Z = z;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        A class inherits the members of its base class. Inheritance means that a class implicitly contains almost all members of its base class. A class doesn't inherit the instance and static constructors, and the finalizer. A derived class can add new members to those members it inherits, but it can't remove the definition of an inherited member. In the previous example, <code>Point3D</code> inherits the <code>X</code> and <code>Y</code> members from <code>Point</code>, and every <code>Point3D</code> instance contains three properties, <code>X</code>, <code>Y</code>, and <code>Z</code>.
+                    </p>
+                    <p>
+                        An implicit conversion exists from a class type to any of its base class types. A variable of a class type can reference an instance of that class or an instance of any derived class. For example, given the previous class declarations, a variable of type <code>Point</code> can reference either a <code>Point</code> or a <code>Point3D</code>:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+Point a = <span class="code-keyword">new</span> Point(10, 20);
+Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="structs">
                 <header>
                     <h3>Structs</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Classes define types that support inheritance and polymorphism. They enable you to create sophisticated behaviors based on hierarchies of derived classes. By contrast, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"><em><strong>struct</strong></em></a> types are simpler types whose primary purpose is to store data values. Structs can't declare a base type; they implicitly derive from <a href="https://docs.microsoft.com/en-us/dotnet/api/system.valuetype">System.ValueType</a>. You can't derive other <code>struct</code> types from a <code>struct</code> type. They're implicitly sealed.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public struct</span> Point
+{
+    <span class="code-keyword">public double</span> X { <span class="code-keyword">get</span>; }
+    <span class="code-keyword">public double</span> Y { <span class="code-keyword">get</span>; }
+
+    <span class="code-keyword">public</span> <span class="code-title">Point</span>(<span class="code-keyword">double</span> x, <span class="code-keyword">double</span> y) => (X, Y) = (x, y);
+}
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="interfaces">
                 <header>
                     <h3>Interfaces</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        An <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/"><em><strong>interface</strong></em></a> defines a contract that can be implemented by classes and structs. An interface can contain methods, properties, events, and indexers. An interface typically doesn't provide implementations of the members it defines—it merely specifies the members that must be supplied by classes or structs that implement the interface.
+                    </p>
+                    <p>
+                        Interfaces may employ <em><strong>multiple inheritance</strong></em>. In the following example, the interface <code>IComboBox</code> inherits from both <code>ITextBox</code> and <code>IListBox</code>.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">interface</span> <span class="code-title">IControl</span>
+{
+    <span class="code-keyword">void</span> <span class="code-title">Paint</span>();
+}
+
+<span class="code-keyword">interface</span> <span class="code-title">ITextBox</span> : <span class="code-title">IControl</span>
+{
+    <span class="code-keyword">void</span> <span class="code-title">SetText</span>(<span class="code-keyword">string</span> text);
+}
+
+<span class="code-keyword">interface</span> <span class="code-title">IListBox</span> : <span class="code-title">IControl</span>
+{
+    <span class="code-keyword">void</span> <span class="code-title">SetItems</span>(<span class="code-keyword">string</span>[] items);
+}
+
+<span class="code-keyword">interface</span> <span class="code-title">IComboBox</span> : <span class="code-title">ITextBox</span>, <span class="code-title">IListBox</span> { }
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Classes and structs can implement multiple interfaces. In the following example, the class <code>EditBox</code> implements both <code>IControl</code> and <code>IDataBound</code>.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">interface</span> <span class="code-title">IDataBound</span>
+{
+    <span class="code-keyword">void</span> <span class="code-title">Bind</span>(Binder b);
+}
+
+<span class="code-keyword">public class</span> <span class="code-title">EditBox</span> : <span class="code-title">IControl</span>, <span class="code-title">IDataBound</span>
+{
+    <span class="code-keyword">public void</span> <span class="code-title">Paint</span>() { }
+    <span class="code-keyword">public void</span> <span class="code-title">Bind</span>(Binder b) { }    
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        When a class or struct implements a particular interface, instances of that class or struct can be implicitly converted to that interface type. For example
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+EditBox editBox = <span class="code-keyword">new</span> EditBox();
+IControl control = editBox;
+IDataBound dataBound = editBox;
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="enums">
                 <header>
                     <h3>Enums</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        An <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum"><em><strong>Enum</strong></em></a> type defines a set of constant values. The following <code>enum</code> declares constants that define different root vegetables:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public enum</span> SomeRootVegetables
+{
+    HorseRadish,
+    Radish,
+    Turnip
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        You can also define an <code>enum</code> to be used in combination as flags. The following declaration declares a set of flags for the four seasons. Any combination of the seasons may be applied, including an <code>All</code> value that includes all seasons:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+[<span class="code-title">Flags</span>]
+<span class="code-keyword">public enum</span> Seasons
+{
+    None = 0,,
+    Summer = 1,
+    Autumn = 2,
+    Winter = 4,
+    Spring = 8,
+    All = Summer | Autumn | Winter | Spring
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The following example shows declarations of both the preceding enums:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">var</span> turnip = SomeRootVegetables.Turnip;
+
+<span class="code-keyword">var</span> spring = Seasons.Spring;
+<span class="code-keyword">var</span> startingOnEquinox = Seasons.Spring | Seasons.Autumn;
+<span class="code-keyword">var</span> theYear = Seasons.All;
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="nullable types">
                 <header>
                     <h3>Nullable Types</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Variables of any type may be declared as <em><strong>non-nullable</strong></em> or <em><strong>nullable</strong></em>. A nullable variable can hold an additional <code>null</code> value, indicating no value. Nullable Value types (structs or enums) are represented by <a href="https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1">System.Nullable&lt;T&gt;</a>. Non-nullable and Nullable Reference types are both represented by the underlying reference type. The distinction is represented by metadata read by the compiler and some libraries. The compiler provides warnings when nullable references are dereferenced without first checking their value against <code>null</code>. The compiler also provides warnings when non-nullable references are assigned a value that may be <code>null</code>. The following example declares a <em><strong>nullable int</strong></em>, initializing it to <code>null</code>. Then, it sets the value to <code>5</code>. It demonstrates the same concept with a <em><strong>nullable string</strong></em>. For more information, see <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable value types</a> and <a href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">nullable reference types</a>.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>? optionalInt = <span class="code-keyword">default</span>;
+optionalInt = 5;
+<span class="code-keyword">string</span>? optionalText = <span class="code-keyword">default</span>;
+optionalText = <span class="code-string">"Hello World."</span>;
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="tuples">
                 <header>
                     <h3>Tuples</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        C# supports <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"><em><strong>tuples</strong></em></a>, which provides concise syntax to group multiple data elements in a lightweight data structure. You instantiate a tuple by declaring the types and names of the members between <code>(</code> and <code>)</code>, as shown in the following example:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+(<span class="code-keyword">double</span> Sum, <span class="code-keyword">int</span> Count) t2 = (4.5, 3);
+Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span class="code-string">elements is</span> {t2.Sum}<span class="code-string">."</span>);
+<span class="code-comment">// Output:</span>
+<span class="code-comment">// Sum of 3 elements is 4.5.</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Tuples provide an alternative for data structure with multiple members, without using the building blocks described in the next article.
+                    </p>
+                </article>
             </section>
 
         </section>
@@ -518,7 +787,11 @@
             <header>
                 <h2>Program Building Blocks</h2>
             </header>
-            <article></article>
+            <article>
+                <p>
+                    The types described in the previous article are built using these building blocks: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members"><em><strong>members</strong></em></a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/"><em><strong>expressions</strong></em>, and <em><strong>statements</strong></em></a>.
+                </p>
+            </article>
 
             <section id="members">
                 <header>
