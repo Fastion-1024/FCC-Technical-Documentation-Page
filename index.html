@@ -275,27 +275,59 @@
                         </ul>
                     </ul>
                     <p>
-                        C# programs use <em>type declarations</em> to create new types. A type declaration specifies the name and
+                        C# programs use <em>type declarations</em> to create new types. A type declaration specifies the
+                        name and
                         the members of the new type. Five of C#'s categories of types are user-definable: class types,
                         struct types, interface types, enum types, and delegate types.
                     </p>
                     <ul>
-                        <li>A <code>class</code> type defines a data structure that contains data members (fields) and function members (methods, properties, and others). Class types support single inheritance and polymorphism, mechanisms whereby derived classes can extend and specialize base classes.</li>
-                        <li>A <code>struct</code> type is similar to a class type in that it represents a structure with data members and function members. However, unlike classes, structs are value types and don't typically require heap allocation. Struct types don't support user-specified inheritance, and all struct types implicitly inherit from type <code>object</code>.</li>
-                        <li>An <code>interface</code> type defines a contract as a named set of public members. A <code>class</code> or <code>struct</code> that implements an <code>interface</code> must provide implementations of the interface's members. An <code>interface</code> may inherit from multiple base interfaces, and a <code>class</code> or <code>struct</code> may implement multiple interfaces.</li>
-                        <li>A <code>delegate</code> type represents references to methods with a particular parameter list and return type. Delegates make it possible to treat methods as entities that can be assigned to variables and passed as parameters. Delegates are analogous to function types provided by functional languages. They're also similar to the concept of function pointers found in some other languages. Unlike function pointers, delegates are object-oriented and type-safe.</li>
+                        <li>A <code>class</code> type defines a data structure that contains data members (fields) and
+                            function members (methods, properties, and others). Class types support single inheritance
+                            and polymorphism, mechanisms whereby derived classes can extend and specialize base classes.
+                        </li>
+                        <li>A <code>struct</code> type is similar to a class type in that it represents a structure with
+                            data members and function members. However, unlike classes, structs are value types and
+                            don't typically require heap allocation. Struct types don't support user-specified
+                            inheritance, and all struct types implicitly inherit from type <code>object</code>.</li>
+                        <li>An <code>interface</code> type defines a contract as a named set of public members. A
+                            <code>class</code> or <code>struct</code> that implements an <code>interface</code> must
+                            provide implementations of the interface's members. An <code>interface</code> may inherit
+                            from multiple base interfaces, and a <code>class</code> or <code>struct</code> may implement
+                            multiple interfaces.</li>
+                        <li>A <code>delegate</code> type represents references to methods with a particular parameter
+                            list and return type. Delegates make it possible to treat methods as entities that can be
+                            assigned to variables and passed as parameters. Delegates are analogous to function types
+                            provided by functional languages. They're also similar to the concept of function pointers
+                            found in some other languages. Unlike function pointers, delegates are object-oriented and
+                            type-safe.</li>
                     </ul>
                     <p>
-                        The <code>class</code>, <code>struct</code>, <code>interface</code>, and <code>delegate</code> types all support generics, whereby they can be parameterized with other types.
+                        The <code>class</code>, <code>struct</code>, <code>interface</code>, and <code>delegate</code>
+                        types all support generics, whereby they can be parameterized with other types.
                     </p>
                     <p>
-                        C# supports single- and multi-dimensional arrays of any type. Unlike the types listed above, array types don't have to be declared before they can be used. Instead, array types are constructed by following a type name with square brackets. For example, <code>int[]</code> is a single-dimensional array of <code>int</code>, <code>int[,]</code> is a two-dimensional array of <code>int</code>, and <code>int[][]</code> is a single-dimensional array of single-dimensional array or "jagged" array of <code>int</code>.
+                        C# supports single- and multi-dimensional arrays of any type. Unlike the types listed above,
+                        array types don't have to be declared before they can be used. Instead, array types are
+                        constructed by following a type name with square brackets. For example, <code>int[]</code> is a
+                        single-dimensional array of <code>int</code>, <code>int[,]</code> is a two-dimensional array of
+                        <code>int</code>, and <code>int[][]</code> is a single-dimensional array of single-dimensional
+                        array or "jagged" array of <code>int</code>.
                     </p>
                     <p>
-                        Nullable types don't require a separate definition. For each non-nullable type <code>T</code>, there's a corresponding nullable type <code>T?</code>, which can hold an additional value, <code>null</code>. For instance, <code>int?</code> is a type that can hold any 32-bit integer or the value <code>null</code>, and <code>string?</code> is a type that can hold any <code>string</code> or the value <code>null</code>.
+                        Nullable types don't require a separate definition. For each non-nullable type <code>T</code>,
+                        there's a corresponding nullable type <code>T?</code>, which can hold an additional value,
+                        <code>null</code>. For instance, <code>int?</code> is a type that can hold any 32-bit integer or
+                        the value <code>null</code>, and <code>string?</code> is a type that can hold any
+                        <code>string</code> or the value <code>null</code>.
                     </p>
                     <p>
-                        C#'s type system is unified such that a value of any type can be treated as an <code>object</code>. Every type in C# directly or indirectly derives from the <code>object</code> class type, and <code>object</code> is the ultimate base class of all types. Values of reference types are treated as objects simply by viewing the values as type <code>object</code>. Values of value types are treated as objects by performing <em>boxing</em> and <em>unboxing operations</em>. In the following example, an <code>int</code> value is converted to <code>object</code> and back again to <code>int</code>.
+                        C#'s type system is unified such that a value of any type can be treated as an
+                        <code>object</code>. Every type in C# directly or indirectly derives from the
+                        <code>object</code> class type, and <code>object</code> is the ultimate base class of all types.
+                        Values of reference types are treated as objects simply by viewing the values as type
+                        <code>object</code>. Values of value types are treated as objects by performing <em>boxing</em>
+                        and <em>unboxing operations</em>. In the following example, an <code>int</code> value is
+                        converted to <code>object</code> and back again to <code>int</code>.
                     </p>
                     <div>
                         <pre>
@@ -307,13 +339,22 @@
                         </pre>
                     </div>
                     <p>
-                        When a value of a value type is assigned to an <code>object</code> reference, a "box" is allocated to hold the value. That box is an instance of a reference type, and the value is copied into that box. Conversely, when an <code>object</code> reference is cast to a value type, a check is made that the referenced <code>object</code> is a box of the correct value type. If the check succeeds, the value in the box is copied to the value type
+                        When a value of a value type is assigned to an <code>object</code> reference, a "box" is
+                        allocated to hold the value. That box is an instance of a reference type, and the value is
+                        copied into that box. Conversely, when an <code>object</code> reference is cast to a value type,
+                        a check is made that the referenced <code>object</code> is a box of the correct value type. If
+                        the check succeeds, the value in the box is copied to the value type
                     </p>
                     <p>
-                        C#'s unified type system effectively means that value types are treated as <code>object</code> references "on demand." Because of the unification, general-purpose libraries that use type <code>object</code> can be used with all types that derive from <code>object</code>, including both reference types and value types.
+                        C#'s unified type system effectively means that value types are treated as <code>object</code>
+                        references "on demand." Because of the unification, general-purpose libraries that use type
+                        <code>object</code> can be used with all types that derive from <code>object</code>, including
+                        both reference types and value types.
                     </p>
                     <p>
-                        There are several kinds of <em>variables</em> in C#, including fields, array elements, local variables, and parameters. Variables represent storage locations. Every variable has a type that determines what values can be stored in the variable, as shown below.
+                        There are several kinds of <em>variables</em> in C#, including fields, array elements, local
+                        variables, and parameters. Variables represent storage locations. Every variable has a type that
+                        determines what values can be stored in the variable, as shown below.
                     </p>
                     <ul>
                         <li>Non-nullable value type</li>
@@ -326,19 +367,24 @@
                         </ul>
                         <li>object</li>
                         <ul>
-                            <li>A <code>null</code> reference, a reference to an instance of that class type, or a reference to an instance of a class derived from that class type</li>
+                            <li>A <code>null</code> reference, a reference to an instance of that class type, or a
+                                reference to an instance of a class derived from that class type</li>
                         </ul>
                         <li>Interface type</li>
                         <ul>
-                            <li>A <code>null</code> reference, a reference to an instance of a class type that implements that interface type, or a reference to a boxed value of a value type that implements that interface type</li>
+                            <li>A <code>null</code> reference, a reference to an instance of a class type that
+                                implements that interface type, or a reference to a boxed value of a value type that
+                                implements that interface type</li>
                         </ul>
                         <li>Array type</li>
                         <ul>
-                            <li>A <code>null</code> reference, a reference to an instance of that array type, or a reference to an instance of a compatible array type</li>
+                            <li>A <code>null</code> reference, a reference to an instance of that array type, or a
+                                reference to an instance of a compatible array type</li>
                         </ul>
                         <li>Delegate type</li>
                         <ul>
-                            <li>A <code>null</code> reference or a reference to an instance of a compatible delegate type</li>
+                            <li>A <code>null</code> reference or a reference to an instance of a compatible delegate
+                                type</li>
                         </ul>
                     </ul>
                 </article>
@@ -350,7 +396,22 @@
                 </header>
                 <article>
                     <p>
-                        The key organizational concepts in C# are <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/"><em><strong>programs</strong></em></a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/namespaces/"><em><strong>namespaces</strong></em></a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/"><em><strong>types</strong></em></a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members"><em><strong>members</strong></em></a>, and <a href="https://docs.microsoft.com/en-us/dotnet/standard/assembly/"><em><strong>assemblies</strong></em></a>. Programs declare types, which contain members and can be organized into namespaces. Classes, structs, and interfaces are examples of types. Fields, methods, properties, and events are examples of members. When C# programs are compiled, they're physically packaged into assemblies. Assemblies typically have the file extension <code>.exe</code> or <code>.dll</code>, depending on whether they implement <em><strong>applications</strong></em> or <em><strong>libraries</strong></em>, respectively.
+                        The key organizational concepts in C# are <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/"><em><strong>programs</strong></em></a>,
+                        <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/namespaces/"><em><strong>namespaces</strong></em></a>,
+                        <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/"><em><strong>types</strong></em></a>,
+                        <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members"><em><strong>members</strong></em></a>,
+                        and <a
+                            href="https://docs.microsoft.com/en-us/dotnet/standard/assembly/"><em><strong>assemblies</strong></em></a>.
+                        Programs declare types, which contain members and can be organized into namespaces. Classes,
+                        structs, and interfaces are examples of types. Fields, methods, properties, and events are
+                        examples of members. When C# programs are compiled, they're physically packaged into assemblies.
+                        Assemblies typically have the file extension <code>.exe</code> or <code>.dll</code>, depending
+                        on whether they implement <em><strong>applications</strong></em> or
+                        <em><strong>libraries</strong></em>, respectively.
                     </p>
                     <p>
                         As a small example, consider an assembly that contains the following code:
@@ -400,19 +461,32 @@
                         </pre>
                     </div>
                     <p>
-                        The fully qualified name of this class is <code>Acme.Collections.Stack</code>. The class contains several members: a field named <code>top</code>, two methods named <code>Push</code> and <code>Pop</code>, and a nested class named <code>Entry</code>. The <code>Entry</code> class further contains three members: a field named <code>next</code>, a field named <code>data</code>, and a constructor. The <code>Stack</code> is a <em>generic</em> class. It has one type parameter, <code>T</code> that is replaced with a concrete type when it's used.
+                        The fully qualified name of this class is <code>Acme.Collections.Stack</code>. The class
+                        contains several members: a field named <code>top</code>, two methods named <code>Push</code>
+                        and <code>Pop</code>, and a nested class named <code>Entry</code>. The <code>Entry</code> class
+                        further contains three members: a field named <code>next</code>, a field named
+                        <code>data</code>, and a constructor. The <code>Stack</code> is a <em>generic</em> class. It has
+                        one type parameter, <code>T</code> that is replaced with a concrete type when it's used.
                     </p>
                     <div class="note">
                         <p>Note</p>
                         <p>
-                            A <em>stack</em> is a "first in - last out" (FILO) collection. New elements are added to the top of the stack. When an element is removed, it is removed from the top of the stack.
+                            A <em>stack</em> is a "first in - last out" (FILO) collection. New elements are added to the
+                            top of the stack. When an element is removed, it is removed from the top of the stack.
                         </p>
                     </div>
                     <p>
-                        Assemblies contain executable code in the form of Intermediate Language (IL) instructions, and symbolic information in the form of metadata. Before it's executed, the Just-In-Time (JIT) compiler of .NET Common Language Runtime converts the IL code in an assembly to processor-specific code.
+                        Assemblies contain executable code in the form of Intermediate Language (IL) instructions, and
+                        symbolic information in the form of metadata. Before it's executed, the Just-In-Time (JIT)
+                        compiler of .NET Common Language Runtime converts the IL code in an assembly to
+                        processor-specific code.
                     </p>
                     <p>
-                        Because an assembly is a self-describing unit of functionality containing both code and metadata, there's no need for <code>#include</code> directives and header files in C#. The public types and members contained in a particular assembly are made available in a C# program simply by referencing that assembly when compiling the program. For example, this program uses the <code>Acme.Collections.Stack</code> class from the <code>acme.dll</code> assembly:
+                        Because an assembly is a self-describing unit of functionality containing both code and
+                        metadata, there's no need for <code>#include</code> directives and header files in C#. The
+                        public types and members contained in a particular assembly are made available in a C# program
+                        simply by referencing that assembly when compiling the program. For example, this program uses
+                        the <code>Acme.Collections.Stack</code> class from the <code>acme.dll</code> assembly:
                     </p>
                     <div>
                         <pre>
@@ -437,10 +511,16 @@
                         </pre>
                     </div>
                     <p>
-                        To compile this program, you would need to <em>reference</em> the assembly containing the stack class defined in the earlier example.
+                        To compile this program, you would need to <em>reference</em> the assembly containing the stack
+                        class defined in the earlier example.
                     </p>
                     <p>
-                        C# programs can be stored in several source files. When a C# program is compiled, all of the source files are processed together, and the source files can freely reference each other. Conceptually, it's as if all the source files were concatenated into one large file before being processed. Forward declarations are never needed in C# because, with few exceptions, declaration order is insignificant. C# doesn't limit a source file to declaring only one public type nor does it require the name of the source file to match a type declared in the source file.
+                        C# programs can be stored in several source files. When a C# program is compiled, all of the
+                        source files are processed together, and the source files can freely reference each other.
+                        Conceptually, it's as if all the source files were concatenated into one large file before being
+                        processed. Forward declarations are never needed in C# because, with few exceptions, declaration
+                        order is insignificant. C# doesn't limit a source file to declaring only one public type nor
+                        does it require the name of the source file to match a type declared in the source file.
                     </p>
                     <p>
                         Further articles in this tour explain these organizational blocks.
@@ -462,19 +542,27 @@
                 </header>
                 <article>
                     <p>
-                        <em>Classes</em> are the most fundamental of C#’s types. A class is a data structure that combines state (fields) and actions (methods and other function members) in a single unit. A class provides a definition for <em>instances</em> of the class, also known as <em>objects</em>. Classes support <em>inheritance</em> and <em>polymorphism</em>, mechanisms whereby <em>derived classes</em> can extend and specialize <em>base classes</em>.
+                        <em>Classes</em> are the most fundamental of C#’s types. A class is a data structure that
+                        combines state (fields) and actions (methods and other function members) in a single unit. A
+                        class provides a definition for <em>instances</em> of the class, also known as <em>objects</em>.
+                        Classes support <em>inheritance</em> and <em>polymorphism</em>, mechanisms whereby <em>derived
+                            classes</em> can extend and specialize <em>base classes</em>.
                     </p>
                     <p>
-                        New classes are created using class declarations. A class declaration starts with a header. The header specifies:
+                        New classes are created using class declarations. A class declaration starts with a header. The
+                        header specifies:
                     </p>
                     <ul>
                         <li>The attributes and modifiers of the class</li>
                         <li>The name of the class</li>
-                        <li>The base class (when inheriting from a <a href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/types#base-classes">base class</a>)</li>
+                        <li>The base class (when inheriting from a <a
+                                href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/types#base-classes">base
+                                class</a>)</li>
                         <li>The interfaces implemented by the class</li>
                     </ul>
                     <p>
-                        The header is followed by the class body, which consists of a list of member declarations written between the delimiters <code>{</code> and <code>}</code>.
+                        The header is followed by the class body, which consists of a list of member declarations
+                        written between the delimiters <code>{</code> and <code>}</code>.
                     </p>
                     <p>
                         The following code shows a declaration of a simple class named <code>Point</code>:
@@ -493,7 +581,10 @@
                         </pre>
                     </div>
                     <p>
-                        Instances of classes are created using the <code>new</code> operator, which allocates memory for a new instance, invokes a constructor to initialize the instance, and returns a reference to the instance. The following statements create two <code>Point</code> objects and store references to those objects in two variables:
+                        Instances of classes are created using the <code>new</code> operator, which allocates memory for
+                        a new instance, invokes a constructor to initialize the instance, and returns a reference to the
+                        instance. The following statements create two <code>Point</code> objects and store references to
+                        those objects in two variables:
                     </p>
                     <div>
                         <pre>
@@ -504,7 +595,8 @@
                         </pre>
                     </div>
                     <p>
-                        The memory occupied by an object is automatically reclaimed when the object is no longer reachable. It's neither necessary nor possible to explicitly deallocate objects in C#.
+                        The memory occupied by an object is automatically reclaimed when the object is no longer
+                        reachable. It's neither necessary nor possible to explicitly deallocate objects in C#.
                     </p>
                 </article>
             </section>
@@ -515,7 +607,13 @@
                 </header>
                 <article>
                     <p>
-                        Generic classes define <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/"><em><strong>type parameters</strong></em></a>. Type parameters are a list of type parameter names enclosed in angle brackets. Type parameters follow the class name. The type parameters can then be used in the body of the class declarations to define the members of the class. In the following example, the type parameters of <code>Pair</code> are <code>TFirst</code> and <code>TSecond</code>:
+                        Generic classes define <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/"><em><strong>type
+                                    parameters</strong></em></a>. Type parameters are a list of type parameter names
+                        enclosed in angle brackets. Type parameters follow the class name. The type parameters can then
+                        be used in the body of the class declarations to define the members of the class. In the
+                        following example, the type parameters of <code>Pair</code> are <code>TFirst</code> and
+                        <code>TSecond</code>:
                     </p>
                     <div>
                         <pre>
@@ -532,7 +630,9 @@
                         </pre>
                     </div>
                     <p>
-                        A class type that is declared to take type parameters is called a <em>generic class type</em>. Struct, interface, and delegate types can also be generic. When the generic class is used, type arguments must be provided for each of the type parameters:
+                        A class type that is declared to take type parameters is called a <em>generic class type</em>.
+                        Struct, interface, and delegate types can also be generic. When the generic class is used, type
+                        arguments must be provided for each of the type parameters:
                     </p>
                     <div>
                         <pre>
@@ -544,7 +644,8 @@
                         </pre>
                     </div>
                     <p>
-                        A generic type with type arguments provided, like <code>Pair&lt;int,string&gt;</code> above, is called a <em>constructed type</em>.
+                        A generic type with type arguments provided, like <code>Pair&lt;int,string&gt;</code> above, is
+                        called a <em>constructed type</em>.
                     </p>
                 </article>
             </section>
@@ -555,7 +656,11 @@
                 </header>
                 <article>
                     <p>
-                        A class declaration may specify a base class. Follow the class name and type parameters with a colon and the name of the base class. Omitting a base class specification is the same as deriving from type <code>object</code>. In the following example, the base class of <code>Point3D</code> is <code>Point</code>. From the first example, the base class of <code>Point</code> is <code>object</code>:
+                        A class declaration may specify a base class. Follow the class name and type parameters with a
+                        colon and the name of the base class. Omitting a base class specification is the same as
+                        deriving from type <code>object</code>. In the following example, the base class of
+                        <code>Point3D</code> is <code>Point</code>. From the first example, the base class of
+                        <code>Point</code> is <code>object</code>:
                     </p>
                     <div>
                         <pre>
@@ -573,10 +678,19 @@
                         </pre>
                     </div>
                     <p>
-                        A class inherits the members of its base class. Inheritance means that a class implicitly contains almost all members of its base class. A class doesn't inherit the instance and static constructors, and the finalizer. A derived class can add new members to those members it inherits, but it can't remove the definition of an inherited member. In the previous example, <code>Point3D</code> inherits the <code>X</code> and <code>Y</code> members from <code>Point</code>, and every <code>Point3D</code> instance contains three properties, <code>X</code>, <code>Y</code>, and <code>Z</code>.
+                        A class inherits the members of its base class. Inheritance means that a class implicitly
+                        contains almost all members of its base class. A class doesn't inherit the instance and static
+                        constructors, and the finalizer. A derived class can add new members to those members it
+                        inherits, but it can't remove the definition of an inherited member. In the previous example,
+                        <code>Point3D</code> inherits the <code>X</code> and <code>Y</code> members from
+                        <code>Point</code>, and every <code>Point3D</code> instance contains three properties,
+                        <code>X</code>, <code>Y</code>, and <code>Z</code>.
                     </p>
                     <p>
-                        An implicit conversion exists from a class type to any of its base class types. A variable of a class type can reference an instance of that class or an instance of any derived class. For example, given the previous class declarations, a variable of type <code>Point</code> can reference either a <code>Point</code> or a <code>Point3D</code>:
+                        An implicit conversion exists from a class type to any of its base class types. A variable of a
+                        class type can reference an instance of that class or an instance of any derived class. For
+                        example, given the previous class declarations, a variable of type <code>Point</code> can
+                        reference either a <code>Point</code> or a <code>Point3D</code>:
                     </p>
                     <div>
                         <pre>
@@ -595,7 +709,14 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                 </header>
                 <article>
                     <p>
-                        Classes define types that support inheritance and polymorphism. They enable you to create sophisticated behaviors based on hierarchies of derived classes. By contrast, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"><em><strong>struct</strong></em></a> types are simpler types whose primary purpose is to store data values. Structs can't declare a base type; they implicitly derive from <a href="https://docs.microsoft.com/en-us/dotnet/api/system.valuetype">System.ValueType</a>. You can't derive other <code>struct</code> types from a <code>struct</code> type. They're implicitly sealed.
+                        Classes define types that support inheritance and polymorphism. They enable you to create
+                        sophisticated behaviors based on hierarchies of derived classes. By contrast, <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"><em><strong>struct</strong></em></a>
+                        types are simpler types whose primary purpose is to store data values. Structs can't declare a
+                        base type; they implicitly derive from <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.valuetype">System.ValueType</a>.
+                        You can't derive other <code>struct</code> types from a <code>struct</code> type. They're
+                        implicitly sealed.
                     </p>
                     <div>
                         <pre>
@@ -619,10 +740,17 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                 </header>
                 <article>
                     <p>
-                        An <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/"><em><strong>interface</strong></em></a> defines a contract that can be implemented by classes and structs. An interface can contain methods, properties, events, and indexers. An interface typically doesn't provide implementations of the members it defines—it merely specifies the members that must be supplied by classes or structs that implement the interface.
+                        An <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/"><em><strong>interface</strong></em></a>
+                        defines a contract that can be implemented by classes and structs. An interface can contain
+                        methods, properties, events, and indexers. An interface typically doesn't provide
+                        implementations of the members it defines—it merely specifies the members that must be supplied
+                        by classes or structs that implement the interface.
                     </p>
                     <p>
-                        Interfaces may employ <em><strong>multiple inheritance</strong></em>. In the following example, the interface <code>IComboBox</code> inherits from both <code>ITextBox</code> and <code>IListBox</code>.
+                        Interfaces may employ <em><strong>multiple inheritance</strong></em>. In the following example,
+                        the interface <code>IComboBox</code> inherits from both <code>ITextBox</code> and
+                        <code>IListBox</code>.
                     </p>
                     <div>
                         <pre>
@@ -647,7 +775,8 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                         </pre>
                     </div>
                     <p>
-                        Classes and structs can implement multiple interfaces. In the following example, the class <code>EditBox</code> implements both <code>IControl</code> and <code>IDataBound</code>.
+                        Classes and structs can implement multiple interfaces. In the following example, the class
+                        <code>EditBox</code> implements both <code>IControl</code> and <code>IDataBound</code>.
                     </p>
                     <div>
                         <pre>
@@ -666,7 +795,8 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                         </pre>
                     </div>
                     <p>
-                        When a class or struct implements a particular interface, instances of that class or struct can be implicitly converted to that interface type. For example
+                        When a class or struct implements a particular interface, instances of that class or struct can
+                        be implicitly converted to that interface type. For example
                     </p>
                     <div>
                         <pre>
@@ -686,7 +816,10 @@ IDataBound dataBound = editBox;
                 </header>
                 <article>
                     <p>
-                        An <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum"><em><strong>Enum</strong></em></a> type defines a set of constant values. The following <code>enum</code> declares constants that define different root vegetables:
+                        An <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum"><em><strong>Enum</strong></em></a>
+                        type defines a set of constant values. The following <code>enum</code> declares constants that
+                        define different root vegetables:
                     </p>
                     <div>
                         <pre>
@@ -701,7 +834,9 @@ IDataBound dataBound = editBox;
                         </pre>
                     </div>
                     <p>
-                        You can also define an <code>enum</code> to be used in combination as flags. The following declaration declares a set of flags for the four seasons. Any combination of the seasons may be applied, including an <code>All</code> value that includes all seasons:
+                        You can also define an <code>enum</code> to be used in combination as flags. The following
+                        declaration declares a set of flags for the four seasons. Any combination of the seasons may be
+                        applied, including an <code>All</code> value that includes all seasons:
                     </p>
                     <div>
                         <pre>
@@ -742,7 +877,22 @@ IDataBound dataBound = editBox;
                 </header>
                 <article>
                     <p>
-                        Variables of any type may be declared as <em><strong>non-nullable</strong></em> or <em><strong>nullable</strong></em>. A nullable variable can hold an additional <code>null</code> value, indicating no value. Nullable Value types (structs or enums) are represented by <a href="https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1">System.Nullable&lt;T&gt;</a>. Non-nullable and Nullable Reference types are both represented by the underlying reference type. The distinction is represented by metadata read by the compiler and some libraries. The compiler provides warnings when nullable references are dereferenced without first checking their value against <code>null</code>. The compiler also provides warnings when non-nullable references are assigned a value that may be <code>null</code>. The following example declares a <em><strong>nullable int</strong></em>, initializing it to <code>null</code>. Then, it sets the value to <code>5</code>. It demonstrates the same concept with a <em><strong>nullable string</strong></em>. For more information, see <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable value types</a> and <a href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">nullable reference types</a>.
+                        Variables of any type may be declared as <em><strong>non-nullable</strong></em> or
+                        <em><strong>nullable</strong></em>. A nullable variable can hold an additional <code>null</code>
+                        value, indicating no value. Nullable Value types (structs or enums) are represented by <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1">System.Nullable&lt;T&gt;</a>.
+                        Non-nullable and Nullable Reference types are both represented by the underlying reference type.
+                        The distinction is represented by metadata read by the compiler and some libraries. The compiler
+                        provides warnings when nullable references are dereferenced without first checking their value
+                        against <code>null</code>. The compiler also provides warnings when non-nullable references are
+                        assigned a value that may be <code>null</code>. The following example declares a
+                        <em><strong>nullable int</strong></em>, initializing it to <code>null</code>. Then, it sets the
+                        value to <code>5</code>. It demonstrates the same concept with a <em><strong>nullable
+                                string</strong></em>. For more information, see <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable
+                            value types</a> and <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">nullable reference
+                            types</a>.
                     </p>
                     <div>
                         <pre>
@@ -763,7 +913,11 @@ optionalText = <span class="code-string">"Hello World."</span>;
                 </header>
                 <article>
                     <p>
-                        C# supports <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"><em><strong>tuples</strong></em></a>, which provides concise syntax to group multiple data elements in a lightweight data structure. You instantiate a tuple by declaring the types and names of the members between <code>(</code> and <code>)</code>, as shown in the following example:
+                        C# supports <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"><em><strong>tuples</strong></em></a>,
+                        which provides concise syntax to group multiple data elements in a lightweight data structure.
+                        You instantiate a tuple by declaring the types and names of the members between <code>(</code>
+                        and <code>)</code>, as shown in the following example:
                     </p>
                     <div>
                         <pre>
@@ -776,7 +930,8 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                         </pre>
                     </div>
                     <p>
-                        Tuples provide an alternative for data structure with multiple members, without using the building blocks described in the next article.
+                        Tuples provide an alternative for data structure with multiple members, without using the
+                        building blocks described in the next article.
                     </p>
                 </article>
             </section>
@@ -789,7 +944,11 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
             </header>
             <article>
                 <p>
-                    The types described in the previous article are built using these building blocks: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members"><em><strong>members</strong></em></a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/"><em><strong>expressions</strong></em>, and <em><strong>statements</strong></em></a>.
+                    The types described in the previous article are built using these building blocks: <a
+                        href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members"><em><strong>members</strong></em></a>,
+                    <a
+                        href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/"><em><strong>expressions</strong></em>,
+                        and <em><strong>statements</strong></em></a>.
                 </p>
             </article>
 
@@ -797,42 +956,333 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                 <header>
                     <h3>Members</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        The members of a <code>class</code> are either <em><strong>static members</strong></em> or
+                        <em><strong>instance members</strong></em>. Static members belong to classes, and instance
+                        members belong to objects (instances of classes).
+                    </p>
+                    <p>
+                        The following list provides an overview of the kinds of members a class can contain.
+                    </p>
+                    <ul>
+                        <li><strong>Constants</strong>: Constant values associated with the class</li>
+                        <li><strong>Fields</strong>: Variables that are associated of the class</li>
+                        <li><strong>Methods</strong>: Actions that can be performed by the class</li>
+                        <li><strong>Properties</strong>: Actions associated with reading and writing named properties of
+                            the class</li>
+                        <li><strong>Indexers</strong>: Actions associated with indexing instances of the class like an
+                            array</li>
+                        <li><strong>Events</strong>: Notifications that can be generated by the class</li>
+                        <li><strong>Operators</strong>: Conversions and expression operators supported by the class</li>
+                        <li><strong>Constructors</strong>: Actions required to initialize instances of the class or the
+                            class itself</li>
+                        <li><strong>Finalizers</strong>: Actions performed before instances of the class are permanently
+                            discarded</li>
+                        <li><strong>Types</strong>: Nested types declared by the class</li>
+                    </ul>
+                </article>
             </section>
 
             <section id="accessibility">
                 <header>
                     <h3>Accessibility</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Each member of a class has an associated accessibility, which controls the regions of program
+                        text that can access the member. There are six possible forms of accessibility. The access
+                        modifiers are summarized below.
+                    </p>
+                    <ul>
+                        <li><code>public</code>: Access isn't limited.</li>
+                        <li><code>private</code>: Access is limited to this class.</li>
+                        <li><code>protected</code>: Access is limited to this class or classes derived from this class.
+                        </li>
+                        <li><code>internal</code>: Access is limited to the current assembly (<code>.exe</code> or
+                            <code>.dll</code>).</li>
+                        <li><code>protected internal</code>: ess is limited to this class, classes derived from this
+                            class, or classes within the same assembly.</li>
+                        <li><code>private protected</code>: Access is limited to this class or classes derived from this
+                            type within the same assembly.</li>
+                    </ul>
+                </article>
             </section>
 
             <section id="fields">
                 <header>
                     <h3>Fields</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A <em>field</em> is a variable that is associated with a class or with an instance of a class.
+                    </p>
+                    <p>
+                        A field declared with the static modifier defines a static field. A static field identifies
+                        exactly one storage location. No matter how many instances of a class are created, there's only
+                        ever one copy of a static field.
+                    </p>
+                    <p>
+                        A field declared without the static modifier defines an instance field. Every instance of a
+                        class contains a separate copy of all the instance fields of that class.
+                    </p>
+                    <p>
+                        In the following example, each instance of the <code>Color</code> class has a separate copy of
+                        the <code>r</code>, <code>g</code>, and <code>b</code> instance fields, but there's only one
+                        copy of the <code>Black</code>, <code>White</code>, <code>Red</code>, <code>Green</code>, and
+                        <code>Blue</code> static fields:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">Color</span>
+{
+    <span class="code-keyword">public static readonly</span> Color Black = <span class="code-keyword">new</span> Color(0, 0, 0);
+    <span class="code-keyword">public static readonly</span> Color White = <span class="code-keyword">new</span> Color(255, 255, 255);
+    <span class="code-keyword">public static readonly</span> Color Red = <span class="code-keyword">new</span> Color(255, 0, 0);
+    <span class="code-keyword">public static readonly</span> Color Green = <span class="code-keyword">new</span> Color(0, 255, 0);
+    <span class="code-keyword">public static readonly</span> Color Blue = <span class="code-keyword">new</span> Color(0, 0, 255);
+
+    <span class="code-keyword">public byte</span> R { <span class="code-keyword">get</span>; }
+    <span class="code-keyword">public byte</span> G { <span class="code-keyword">get</span>; }
+    <span class="code-keyword">public byte</span> B { <span class="code-keyword">get</span>; }
+
+    <span class="code-keyword">public</span> <span class="code-title">Color</span>(<span class="code-keyword">byte</span> r, <span class="code-keyword">byte</span> g, <span class="code-keyword">byte</span> b)
+    {
+        R = r;
+        G = g;
+        B = b;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        As shown in the previous example, <em>read-only fields</em> may be declared with a
+                        <code>readonly</code> modifier. Assignment to a read-only field can only occur as part of the
+                        field’s declaration or in a constructor in the same class.
+                    </p>
+                </article>
             </section>
 
             <section id="methods">
                 <header>
                     <h3>Methods</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A <em>method</em> is a member that implements a computation or action that can be performed by
+                        an object or class. <em>Static methods</em> are accessed through the class. <em>Instance
+                            methods</em> are accessed through instances of the class.
+                    </p>
+                    <p>
+                        Methods may have a list of <em>parameters</em>, which represent values or variable references
+                        passed to the method. Methods have a <em>return type</em>, which specifies the type of the value
+                        computed and returned by the method. A method’s return type is <code>void</code> if it doesn't
+                        return a value.
+                    </p>
+                    <p>
+                        Like types, methods may also have a set of type parameters, for which type arguments must be
+                        specified when the method is called. Unlike types, the type arguments can often be inferred from
+                        the arguments of a method call and need not be explicitly given.
+                    </p>
+                    <p>
+                        The <em>signature</em> of a method must be unique in the class in which the method is declared.
+                        The signature of a method consists of the name of the method, the number of type parameters, and
+                        the number, modifiers, and types of its parameters. The signature of a method doesn't include
+                        the return type.
+                    </p>
+                    <p>
+                        When a method body is a single expression, the method can be defined using a compact expression
+                        format, as shown in the following example:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public override</span> <span class="code-title">ToString</span>() => <span class="code-string">"This is an object"</span>;
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="parameters">
                 <header>
                     <h3>Parameters</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Parameters are used to pass values or variable references to methods. The parameters of a method
+                        get their actual values from the <em>arguments</em> that are specified when the method is
+                        invoked. There are four kinds of parameters: value parameters, reference parameters, output
+                        parameters, and parameter arrays.
+                    </p>
+                    <p>
+                        A <em>value parameter</em> is used for passing input arguments. A value parameter corresponds to
+                        a local variable that gets its initial value from the argument that was passed for the
+                        parameter. Modifications to a value parameter don't affect the argument that was passed for the
+                        parameter.
+                    </p>
+                    <p>
+                        Value parameters can be optional, by specifying a default value so that corresponding arguments
+                        can be omitted.
+                    </p>
+                    <p>
+                        A <em>reference parameter</em> is used for passing arguments by reference. The argument passed
+                        for a reference parameter must be a variable with a definite value. During execution of the
+                        method, the reference parameter represents the same storage location as the argument variable. A
+                        reference parameter is declared with the ref modifier. The following example shows the use of
+                        <code>ref</code> parameters.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">static void</span> <span class="code-title">Swap</span>(<span class="code-keyword">ref int</span> x, <span class="code-keyword">ref int</span> y)
+{
+    <span class="code-keyword">int</span> temp = x;
+    x = y;
+    y = temp;
+}
+
+<span class="code-keyword">public static void</span> <span class="code-title">SwapExample</span>()
+{
+    <span class="code-keyword">int</span> i = 1, j = 2;
+    Swap(<span class="code-keyword">ref</span> i , <span class="code-keyword">ref</span> j);
+    Console.WriteLine(<span class="code-string">$"</span>{i} {j}<span class="code-string">"</span>);    <span class="code-comment">// "2 1"</span>
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        An <em>output parameter</em> is used for passing arguments by reference. It's similar to a
+                        reference parameter, except that it doesn't require that you explicitly assign a value to the
+                        caller-provided argument. An output parameter is declared with the <code>out</code> modifier.
+                        The following example shows the use of <code>out</code> parameters using the syntax introduced
+                        in C# 7.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">static void</span> <span class="code-title">Divide</span>(<span class="code-keyword">int</span> x, <span class="code-keyword">int</span> y, <span class="code-keyword">out int</span> result, <span class="code-keyword">out int</span> remainder)
+{
+    result = x / y;
+    remainder = x % y;
+}
+
+<span class="code-keyword">public static void</span> <span class="code-title">OutUsage</span>()
+{
+    Divide(10, 3, <span class="code-keyword">out int</span> res, <span class="code-keyword">out int</span> rem);
+    Console.WriteLine(<span class="code-string">$"</span>{res} {rem}<span class="code-string">"</span>);    <span class="code-comment">// "3 1"</span>
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        A <em>parameter array</em> permits a variable number of arguments to be passed to a method. A
+                        parameter array is declared with the <code>params</code> modifier. Only the last parameter of a
+                        method can be a parameter array, and the type of a parameter array must be a single-dimensional
+                        array type. The <code>Write</code> and <code>WriteLine</code> methods of the <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.console">System.Console</a> class
+                        are good examples of parameter array usage. They're declared as follows.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">Console</span>
+{
+    <span class="code-keyword">public static void</span> <span class="code-title">Write</span>(<span class="code-keyword">string</span> fmt, <span class="code-keyword">params object</span>[] args) { }
+    <span class="code-keyword">public static void</span> <span class="code-title">WriteLine</span>(<span class="code-keyword">string</span> fmt, <span class="code-keyword">params object</span>[] args) { }
+    <span class="code-comment">// ...</span>
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Within a method that uses a parameter array, the parameter array behaves exactly like a regular
+                        parameter of an array type. However, in an invocation of a method with a parameter array, it's
+                        possible to pass either a single argument of the parameter array type or any number of arguments
+                        of the element type of the parameter array. In the latter case, an array instance is
+                        automatically created and initialized with the given arguments. This example
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span> x, y, z;
+x = 3;
+y = 4;
+z = 5;
+Console.WriteLine(<span class="code-string">"x={0} y={1} z={2}"</span>, x, y, z);
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        is equivalent to writing the following.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span> x = 3, y = 4, z = 5;
+
+<span class="code-keyword">string</span>s = <span class="code-string">"x={0} y={1} z={2}"</span>;
+<span class="code-keyword">object</span>[] args = <span class="code-keyword">new object</span>[3];
+args[0] = x;
+args[1] = y;
+args[2] = z;
+Console.WriteLine(s, args);
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="method-body-and-local-variables">
                 <header>
                     <h3>Method Body and Local Variables</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A method’s body specifies the statements to execute when the method is invoked.
+                    </p>
+                    <p>
+                        A method body can declare variables that are specific to the invocation of the method. Such
+                        variables are called <em>local variables</em>. A local variable declaration specifies a type
+                        name, a variable name, and possibly an initial value. The following example declares a local
+                        variable <code>i</code> with an initial value of zero and a local variable <code>j</code> with
+                        no initial value.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">class</span> <span class="code-title">Squares</span>
+{
+    <span class="code-keyword">public static void</span> <span class="code-title">WriteSquares</span>()
+    {
+        <span class="code-keyword">int</span> i = 0;
+        <span class="code-keyword">int</span> j;
+        <span class="code-keyword">while</span> (i &lt; 10)
+        {
+            j = i * i;
+            Console.WriteLine(<span class="code-string">$"</span>{i} <span class="code-string">x</span> {i} = {j}<span class="code-string">"</span>);
+            i = i + 1;
+        }
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        C# requires a local variable to be <em>definitely assigned</em> before its value can be
+                        obtained. For example, if the declaration of the previous <code>i</code> didn't include an
+                        initial value, the compiler would report an error for the later usages of <code>i</code> because
+                        <code>i</code> wouldn't be definitely assigned at those points in the program.
+                    </p>
+                    <p>
+                        A method can use <code>return</code> statements to return control to its caller. In a method
+                        returning <code>void</code>, <code>return</code> statements can't specify an expression. In a
+                        method returning non-void, <code>return</code> statements must include an expression that
+                        computes the return value.
+                    </p>
+                </article>
             </section>
 
             <section id="static-and-instance-methods">
