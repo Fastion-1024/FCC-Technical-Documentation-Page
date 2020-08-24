@@ -1289,84 +1289,792 @@ Console.WriteLine(s, args);
                 <header>
                     <h3>Static and Instance Methods</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A method declared with a <code>static</code> modifier is a <em>static method</em>. A static
+                        method doesn't operate on a specific instance and can only directly access static members.
+                    </p>
+                    <p>
+                        A method declared without a <code>static</code> modifier is an <em>instance method</em>. An
+                        instance method operates on a specific instance and can access both static and instance members.
+                        The instance on which an instance method was invoked can be explicitly accessed as
+                        <code>this</code>. It's an error to refer to <code>this</code> in a static method.
+                    </p>
+                    <p>
+                        The following <code>Entity</code> class has both static and instance members.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">class</span> <span class="code-title">Entity</span>
+{
+    <span class="code-keyword">static int</span> s_nextSerialNo;
+    <span class="code-keyword">int</span> _serialNo;
+
+    <span class="code-keyword">public</span> <span class="code-title">Entity</span>()
+    {
+        _serialNo = s_nextSerialNo++;
+    }
+
+    <span class="code-keyword">public int</span> <span class="code-title">GetSerialNo</span>()
+    {
+        <span class="code-keyword">return</span> _serialNo;
+    }
+
+    <span class="code-keyword">public static int</span> <span class="code-title">GetNextSerialNo</span>()
+    {
+        <span class="code-keyword">return</span> s_nextSerialNo;
+    }
+
+    <span class="code-keyword">public static void</span> <span class="code-title">SetNextSerialNo</span>(<span class="code-keyword">int value</span>)
+    {
+        s_nextSerialNo = <span class="code-keyword">value</span>
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Each <code>Entity</code> instance contains a serial number (and presumably some other
+                        information that isn't shown here). The <code>Entity</code> constructor (which is like an
+                        instance method) initializes the new instance with the next available serial number. Because the
+                        constructor is an instance member, it's permitted to access both the <code>_serialNo</code>
+                        instance field and the <code>s_nextSerialNo</code> static field.
+                    </p>
+                    <p>
+                        The <code>GetNextSerialNo</code> and <code>SetNextSerialNo</code> static methods can access the
+                        <code>s_nextSerialNo</code> static field, but it would be an error for them to directly access
+                        the <code>_serialNo</code> instance field.
+                    </p>
+                    <p>
+                        The following example shows the use of the <code>Entity</code> class.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+Entity.SetNextSerialNo(1000);
+Entity e1 = <span class="code-keyword">new</span> Entity();
+Entity e2 = <span class="code-keyword">new</span> Entity();
+Console.WriteLine(e1.GetSerialNo());            <span class="code-comment">// Outputs "1000"</span>
+Console.WriteLine(e2.GetSerialNo());            <span class="code-comment">// Outputs "1001"</span>
+Console.WriteLine(Entity.GetNextSerialNo());    <span class="code-comment">// Outputs "1002"</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The <code>SetNextSerialNo</code> and <code>GetNextSerialNo</code> static methods are invoked on
+                        the class whereas the <code>GetSerialNo</code> instance method is invoked on instances of the
+                        class.
+                    </p>
+                </article>
             </section>
 
             <section id="virtual-override-and-abstract-methods">
                 <header>
                     <h3>Virtual, Override and Abstract Methods</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        When an instance method declaration includes a <code>virtual</code> modifier, the method is said
+                        to be a <em>virtual method</em>. When no virtual modifier is present, the method is said to be a
+                        <em>nonvirtual method</em>.
+                    </p>
+                    <p>
+                        When a virtual method is invoked, the <em>run-time type</em> of the instance for which that
+                        invocation takes place determines the actual method implementation to invoke. In a nonvirtual
+                        method invocation, the <em>compile-time type</em> of the instance is the determining factor.
+                    </p>
+                    <p>
+                        A virtual method can be <em>overridden</em> in a derived class. When an instance method
+                        declaration includes an override modifier, the method overrides an inherited virtual method with
+                        the same signature. Aa virtual method declaration introduces a new method. An override method
+                        declaration specializes an existing inherited virtual method by providing a new implementation
+                        of that method.
+                    </p>
+                    <p>
+                        An <em>abstract method</em> is a virtual method with no implementation. An abstract method is
+                        declared with the <code>abstract</code> modifier and is permitted only in an abstract class. An
+                        abstract method must be overridden in every non-abstract derived class.
+                    </p>
+                    <p>
+                        The following example declares an abstract class, <code>Expression</code>, which represents an
+                        expression tree node, and three derived classes, <code>Constant</code>,
+                        <code>VariableReference</code>, and <code>Operation</code>, which implement expression tree
+                        nodes for constants, variable references, and arithmetic operations. (This example is similar
+                        to, but not related to the expression tree types).
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public abstract class</span> <span class="code-title">Expression</span>
+{
+    <span class="code-keyword">public abstract double</span> <span class="code-title">Evaluate</span>(Dictionary&lt;<span class="code-keyword">string</span>, <span class="code-keyword">object</span>&gt; vars);
+}
+
+<span class="code-keyword">public class</span> <span class="code-title">Constant</span> : <span class="code-title">Expression</span>
+{
+    <span class="code-keyword">double</span> _value;
+
+    <span class="code-keyword">public</span> <span class="code-title">Constant</span>(<span class="code-keyword">double value</span>)
+    {
+        _value = <span class="code-keyword">value</span>;
+    }
+
+    <span class="code-keyword">public override double</span> <span class="code-title">Evaluate</span>(Dictionary&lt;<span class="code-keyword">string</span>, <span class="code-keyword">object</span>&gt; vars)
+    {
+        <span class="code-keyword">return</span> _value;
+    }
+}
+
+<span class="code-keyword">public class</span> <span class="code-title">VariableReference</span> : <span class="code-title">Expression</span>
+{
+    <span class="code-keyword">string</span> _name;
+
+    <span class="code-keyword">public</span> <span class="code-title">VariableReference</span>(<span class="code-keyword">string</span> name)
+    {
+        _name = name;
+    }
+
+    <span class="code-keyword">public override double</span> <span class="code-title">Evaluate</span>(Dictionary&lt;<span class="code-keyword">string</span>, <span class="code-keyword">object</span>&gt; vars)
+    {
+        <span class="code-keyword">object value</span> = vars[_name] ?? <span class="code-keyword">throw new</span> Exception(<span class="code-string">$"Unknown variable:</span> {_name}<span class="code-string">"</span>);
+        <span class="code-keyword">return</span> Convert.ToDouble(<span class="code-keyword">value</span>);
+    }
+}
+
+<span class="code-keyword">public class</span> <span class="code-title">Operation</span> : <span class="code-title">Expression</span>
+{
+    Expression _left;
+    <span class="code-keyword">char</span> _op;
+    Expression _right;
+
+    <span class="code-keyword">public</span> <span class="code-title">Operation</span>(Expression left, <span class="code-keyword">char</span> op, Expression right)
+    {
+        _left = left;
+        _op = op;
+        _right = right;
+    }
+
+    <span class="code-keyword">public override double</span> <span class="code-title">Evaluate</span>(Dictionary&lt;<span class="code-keyword">string</span>, <span class="code-keyword">object</span>&gt; vars)
+    {
+        <span class="code-keyword">double</span> x = left.Evaluate(vars);
+        <span class="code-keyword">double</span> y = right.Evaluate(vars);
+        <span class="code-keyword">switch</span> (_op)
+        {
+            <span class="code-keyword">case</span> <span class="code-string">'+'</span>: <span class="code-keyword">return</span> x + y;
+            <span class="code-keyword">case</span> <span class="code-string">'-'</span>: <span class="code-keyword">return</span> x - y;
+            <span class="code-keyword">case</span> <span class="code-string">'*'</span>: <span class="code-keyword">return</span> x * y;
+            <span class="code-keyword">case</span> <span class="code-string">'/'</span>: <span class="code-keyword">return</span> x / y;
+
+            <span class="code-keyword">default</span>: <span class="code-keyword">throw new</span> Exception(<span class="code-string">"Unknown operator"</span>);
+        }
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The previous four classes can be used to model arithmetic expressions. For example, using
+                        instances of these classes, the expression <code>x + 3</code> can be represented as follows.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+Expression e = <span class="code-keyword">new</span> Operation(
+    <span class="code-keyword">new</span> VariableReference(<span class="code-string">"x"</span>,
+    <span class="code-string">'+'</span>,
+    <span class="code-keyword">new</span> Constant(3));
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The <code>Evaluate</code> method of an <code>Expression</code> instance is invoked to evaluate
+                        the given expression and produce a <code>double</code> value. The method takes a
+                        <code>Dictionary</code> argument that contains variable names (as keys of the entries) and
+                        values (as values of the entries). Because <code>Evaluate</code> is an abstract method,
+                        non-abstract classes derived from <code>Expression</code> must override <code>Evaluate</code>.
+                    </p>
+                    <p>
+                        A <code>Constant</code>'s implementation of <code>Evaluate</code> simply returns the stored
+                        constant. A <code>VariableReference</code>'s implementation looks up the variable name in the
+                        dictionary and returns the resulting value. An <code>Operation</code>'s implementation first
+                        evaluates the left and right operands (by recursively invoking their <code>Evaluate</code>
+                        methods) and then performs the given arithmetic operation.
+                    </p>
+                    <p>
+                        The following program uses the <code>Expression</code> classes to evaluate the expression
+                        <code>x * (y + 2)</code> for different values of <code>x</code> and <code>y</code>.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+Expression e = <span class="code-keyword">new</span> Operation(
+    <span class="code-keyword">new</span> VariableReference(<span class="code-string">"x"</span>),
+    <span class="code-string">'*'</span>,
+    <span class="code-keyword">new</span> Operation(
+        <span class="code-keyword">new</span> VariableReference(<span class="code-string">"y"</span>),
+        <span class="code-string">'+'</span>,
+        <span class="code-keyword">new</span> Constant(2)
+    )
+);
+Dictionary&lt;<span class="code-keyword">string</span>, <span class="code-keyword">object</span>&gt; vars = <span class="code-keyword">new</span> Dictionary&lt;<span class="code-keyword">string</span>, <span class="code-keyword">object</span>&gt;();
+vars[<span class="code-string">"x"</span>] = 3;
+vars[<span class="code-string">"y"</span>] = 5;
+Console.WriteLine(e.Evaluate(vars));    <span class="code-comment">// "21"</span>
+vars[<span class="code-string">"x"</span>] = 1.5;
+vars[<span class="code-string">"y"</span>] = 9;
+Console.WriteLine(e.Evaluate(vars));    <span class="code-comment">// "16.5</span>
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="method-overloading">
                 <header>
                     <h3>Method Overloading</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Method <em>overloading</em> permits multiple methods in the same class to have the same name as
+                        long as they have unique signatures. When compiling an invocation of an overloaded method, the
+                        compiler uses <em>overload resolution</em> to determine the specific method to invoke. Overload
+                        resolution finds the one method that best matches the arguments. If no single best match can be
+                        found, an error is reported. The following example shows overload resolution in effect. The
+                        comment for each invocation in the <code>UsageExample</code> method shows which method is
+                        invoked.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">class</span> <span class="code-title">OverloadingExample</span>
+{
+    <span class="code-keyword">static void</span> F() => Console.WriteLine(<span class="code-string">"F()"</span>);
+    <span class="code-keyword">static void</span> F(<span class="code-keyword">object</span> x) => Console.WriteLine(<span class="code-string">"F(object)"</span>);
+    <span class="code-keyword">static void</span> F(<span class="code-keyword">int</span> x) => Console.WriteLine(<span class="code-string">"F(int)"</span>);
+    <span class="code-keyword">static void</span> F(<span class="code-keyword">double</span> x) => Console.WriteLine(<span class="code-string">"F(double)"</span>);
+    <span class="code-keyword">static void</span> F&lt;T&gt;(T x) => Console.WriteLine(<span class="code-string">"F&lt;T&gt;(T)"</span>);
+    <span class="code-keyword">static void</span> F(<span class="code-keyword">double</span> x, <span class="code-keyword">double</span> y) => Console.WriteLine(<span class="code-string">"F(double, double)"</span>);
+
+    <span class="code-keyword">public static void</span> <span class="code-title">UsageExample</span>()
+    {
+        F();                <span class="code-comment">// Invokes F()</span>
+        F(1);               <span class="code-comment">// Invokes F(int)</span>
+        F(1.0);             <span class="code-comment">// Invokes F(double)</span>
+        F(<span class="code-string">"abc"</span>);           <span class="code-comment">// Invokes F&lt;string&gt;(string)</span>
+        F((double)1);       <span class="code-comment">// Invokes F(double)</span>
+        F((object)1);       <span class="code-comment">// Invokes F(object)</span>
+        F&lt;int&gt;(1);          <span class="code-comment">// Invokes F&lt;int&gt;(int)</span>
+        F(1, 1);            <span class="code-comment">// Invokes F(double, double)</span>
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        As shown by the example, a particular method can always be selected by explicitly casting the
+                        arguments to the exact parameter types and type arguments.
+                    </p>
+                </article>
             </section>
 
             <section id="other-function-methods">
                 <header>
                     <h3>Other Function Members</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Members that contain executable code are collectively known as the <em>function members</em> of
+                        a class. The preceding section describes methods, which are the primary types of function
+                        members. This section describes the other kinds of function members supported by C#:
+                        constructors, properties, indexers, events, operators, and finalizers.
+                    </p>
+                    <p>
+                        The following example shows a generic class called <code>MyList&lt;T&gt;</code>, which
+                        implements a growable list of objects. The class contains several examples of the most common
+                        kinds of function members.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">MyList</span>&lt;<span class="code-title">T</span>&gt;
+{
+    <span class="code-keyword">const int</span> DefaultCapacity = 4;
+
+    T[] _items;
+    <span class="code-keyword">int</span> _count;
+
+    <span class="code-keyword">public</span> <span class="code-title">MyList</span>(<span class="code-keyword">int</span> capacity = DefaultCapacity)
+    {
+        _items = <span class="code-keyword">new</span> T[capacity];
+    }
+
+    <span class="code-keyword">public int</span> Count => _count;
+
+    <span class="code-keyword">public int</span> Capacity
+    {
+        <span class="code-keyword">get</span> => _items.Length;
+        <span class="code-keyword">set</span>
+        {
+            <span class="code-keyword">if</span> (<span class="code-keyword">value</span> &lt; _count) <span class="code-keyword">value</span> = _count;
+            <span class="code-keyword">if</span> (<span class="code-keyword">value</span> != _items.Length)
+            {
+                T[] newItems = <span class="code-keyword">new</span> T[<span class="code-keyword">value</span>];
+                Array.Copy(_items, 0, newItems, 0, _count);
+                _items = newItems;
+            }
+        }
+    }
+
+    <span class="code-keyword">public</span> T <span class="code-keyword">this</span>[<span class="code-keyword">int</span> index]
+    {
+        <span class="code-keyword">get</span> => _items[index];
+        <span class="code-keyword">set</span>
+        {
+            _items[index] = <span class="code-keyword">value</span>;
+            OnChanged();
+        }
+    }
+
+    <span class="code-keyword">public void</span> <span class="code-title">Add</span>(T item)
+    {
+        <span class="code-keyword">if</span> (_count == Capacity) Capacity = _count * 2;
+        _items[_count] = item;
+        _count++;
+        OnChanged();
+    }
+    <span class="code-keyword">protected virtual void</span> <span class="code-title">OnChanged</span>() =>
+        Changed?.Invoke(<span class="code-keyword">this</span>, EventArgs.Empty);
+
+    <span class="code-keyword">public override bool</span> <span class="code-title">Equals</span>(<span class="code-keyword">object</span> other) =>
+        Equals(<span class="code-keyword">this</span>, other <span class="code-keyword">as</span> MyList&lt;T&gt;);
+
+    <span class="code-keyword">static bool</span> <span class="code-title">Equals</span>(MyList&lt;T&gt; a, MyList&lt;T&gt; b)
+    {
+        <span class="code-keyword">if</span> (Object.ReferenceEquals(a, <span class="code-title">null</span>)) <span class="code-keyword">return</span> Object.ReferenceEquals(b, <span class="code-title">null</span>);
+        <span class="code-keyword">if</span> (Object.ReferenceEquals(b, <span class="code-title">null</span>) || a._count != b._count)
+            <span class="code-keyword">return</span> <span class="code-title">false</span>;
+        <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; a._count; i++)
+        {
+            <span class="code-keyword">if</span> (!<span class="code-keyword">object</span>.Equals(a._items[i], b._items[i]))
+            {
+                <span class="code-keyword">return</span> <span class="code-title">false</span>;
+            }
+        }
+        <span class="code-keyword">return</span> <span class="code-title">true</span>;
+    }
+
+    <span class="code-keyword">public event</span> EventHandler Changed;
+
+    <span class="code-keyword">public static bool operator</span> ==(MyList&lt;T&gt; a, MyList&lt;T&gt; b) =>
+        Equals(a, b);
+    
+    <span class="code-keyword">public static bool operator</span> !=(MyList&lt;T&gt; a, MyList&lt;T&gt; b) =>
+        !Equals(a, b);
+}
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
             <section id="constructors">
                 <header>
                     <h3>Constructors</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        C# supports both instance and static constructors. An <em>instance constructor</em> is a member
+                        that implements the actions required to initialize an instance of a class. A <em>static
+                            constructor</em> is a member that implements the actions required to initialize a class
+                        itself when it's first loaded.
+                    </p>
+                    <p>
+                        A constructor is declared like a method with no return type and the same name as the containing
+                        class. If a constructor declaration includes a <code>static</code> modifier, it declares a
+                        static constructor. Otherwise, it declares an instance constructor.
+                    </p>
+                    <p>
+                        Instance constructors can be overloaded and can have optional parameters. For example, the
+                        <code>MyList&lt;T&gt;</code> class declares one instance constructor with a single optional
+                        <code>int</code> parameter. Instance constructors are invoked using the <code>new</code>
+                        operator. The following statements allocate two <code>MyList&lt;string&gt;</code> instances
+                        using the constructor of the <code>MyList</code> class with and without the optional argument.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+MyList&lt;<span class="code-keyword">string</span>&gt; list1 = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
+MyList&lt;<span class="code-keyword">string</span>&gt; list2 = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;(10);
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Unlike other members, instance constructors aren't inherited. A class has no instance
+                        constructors other than those constructors actually declared in the class. If no instance
+                        constructor is supplied for a class, then an empty one with no parameters is automatically
+                        provided.
+                    </p>
+                </article>
             </section>
 
             <section id="properties">
                 <header>
                     <h3>Properties</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        <em>Properties</em> are a natural extension of fields. Both are named members with associated
+                        types, and the syntax for accessing fields and properties is the same. However, unlike fields,
+                        properties don't denote storage locations. Instead, properties have <em>accessors</em> that
+                        specify the statements executed when their values are read or written.
+                    </p>
+                    <p>
+                        A property is declared like a field, except that the declaration ends with a get accessor or a
+                        set accessor written between the delimiters <code>{</code> and <code>}</code> instead of ending
+                        in a semicolon. A property that has both a get accessor and a set accessor is a <em>read-write
+                            property</em>, a property that has only a get accessor is a <em>read-only property</em>, and
+                        a property that has only a set accessor is a <em>write-only property</em>.
+                    </p>
+                    <p>
+                        A get accessor corresponds to a parameterless method with a return value of the property type. A
+                        set accessor corresponds to a method with a single parameter named value and no return type. The
+                        get accessor computes the value of the property. The set accessor provides a new value for the
+                        property. When the property is the target of an assignment, or the operand of <code>++</code> or
+                        <code>--</code>, the set accessor is invoked. In other cases where the property is referenced,
+                        the get accessor is invoked.
+                    </p>
+                    <p>
+                        When a property is referenced as the target of an assignment or as the operand of ++ or --, the
+                        set accessor is invoked with an argument that provides the new value.
+                    </p>
+                    <p>
+                        The <code>MyList&lt;T&gt;</code> class declares two properties, <code>Count</code> and
+                        <code>Capacity</code>, which are read-only and read-write, respectively. The following code is
+                        an example of use of these properties:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+MyList&lt;<span class="code-keyword">string</span>&gt; names = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
+names.Capacity = 100;     <span class="code-comment">// Invokes set accessor</span>
+<span class="code-keyword">int</span> i = names.Count;      <span class="code-comment">// Invokes get accessor</span>
+<span class="code-keyword">int</span> j = names.Capacity;   <span class="code-comment">// Invokes get accessor</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Similar to fields and methods, C# supports both instance properties and static properties.
+                        Static properties are declared with the static modifier, and instance properties are declared
+                        without it.
+                    </p>
+                    <p>
+                        The accessor(s) of a property can be virtual. When a property declaration includes a
+                        <code>virtual</code>, <code>abstract</code>, or <code>override</code> modifier, it applies to
+                        the accessor(s) of the property.
+                    </p>
+                </article>
             </section>
 
             <section id="indexers">
                 <header>
                     <h3>Indexers</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        An <em>indexer</em> is a member that enables objects to be indexed in the same way as an array.
+                        An indexer is declared like a property except that the name of the member is <code>this</code>
+                        followed by a parameter list written between the delimiters <code>[</code> and <code>]</code>.
+                        The parameters are available in the accessor(s) of the indexer. Similar to properties, indexers
+                        can be read-write, read-only, and write-only, and the accessor(s) of an indexer can be virtual.
+                    </p>
+                    <p>
+                        The <code>MyList&lt;T&gt;</code> class declares a single read-write indexer that takes an
+                        <code>int</code> parameter. The indexer makes it possible to index <code>MyList&lt;T&gt;</code>
+                        instances with <code>int</code> values. For example:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+MyList&lt;<span class="code-keyword">string</span>&gt; names = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
+names.Add(<span class="code-string">"Liz"</span>);
+names.Add(<span class="code-string">"Martha"</span>);
+names.Add(<span class="code-string">"Beth"</span>);
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; names.Count; i++)
+{
+    <span class="code-keyword">string</span> s = names[i];
+    names[i] = s.ToUpper();
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Indexers can be overloaded. A class can declare multiple indexers as long as the number or types
+                        of their parameters differ.
+                    </p>
+                </article>
             </section>
 
             <section id="events">
                 <header>
                     <h3>Events</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        An <em>event</em> is a member that enables a class or object to provide notifications. An event
+                        is declared like a field except that the declaration includes an <code>event</code> keyword and
+                        the type must be a delegate type.
+                    </p>
+                    <p>
+                        Within a class that declares an event member, the event behaves just like a field of a delegate
+                        type (provided the event isn't abstract and doesn't declare accessors). The field stores a
+                        reference to a delegate that represents the event handlers that have been added to the event. If
+                        no event handlers are present, the field is <code>null</code>.
+                    </p>
+                    <p>
+                        The <code>MyList&lt;T&gt;</code> class declares a single event member called
+                        <code>Changed</code>, which indicates that a new item has been added to the list. The Changed
+                        event is raised by the <code>OnChanged</code> virtual method, which first checks whether the
+                        event is <code>null</code> (meaning that no handlers are present). The notion of raising an
+                        event is precisely equivalent to invoking the delegate represented by the event. There are no
+                        special language constructs for raising events.
+                    </p>
+                    <p>
+                        Clients react to events through <em>event handlers</em>. Event handlers are attached using the
+                        <code>+=</code> operator and removed using the <code>-=</code> operator. The following example
+                        attaches an event handler to the <code>Changed</code> event of a
+                        <code>MyList&lt;string&gt;</code>.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">class</span> <span class="code-title">EventExample</span>
+{
+    <span class="code-keyword">static int</span> s_changeCount;
+
+    <span class="code-keyword">static void</span> <span class="code-title">ListChanged</span>(<span class="code-keyword">object</span> sender, EventArgs e)
+    {
+        s_changeCount++;
+    }
+
+    <span class="code-keyword">public static void</span> <span class="code-title">Usages</span>()
+    {
+        <span class="code-keyword">var</span> names = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
+        names.Changed += <span class="code-keyword">new</span> EventHandler(ListChanged);
+        names.Add(<span class="code-string">"Liz"</span>);
+        names.Add(<span class="code-string">"Martha"</span>);
+        names.Add(<span class="code-string">"Beth"</span>);
+        Console.WriteLine(s_changeCount);   <span class="code-comment">// "3"</span>
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        For advanced scenarios where control of the underlying storage of an event is desired, an event
+                        declaration can explicitly provide <code>add</code> and <code>remove</code> accessors, which are
+                        similar to the <code>set</code> accessor of a property.
+                    </p>
+                </article>
             </section>
 
             <section id="operators">
                 <header>
                     <h3>Operators</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        An <em>operator</em> is a member that defines the meaning of applying a particular expression
+                        operator to instances of a class. Three kinds of operators can be defined: unary operators,
+                        binary operators, and conversion operators. All operators must be declared as
+                        <code>public</code> and <code>static</code>.
+                    </p>
+                    <p>
+                        The <code>MyList&lt;T&gt;</code> class declares two operators, <code>operator ==</code> and
+                        <code>operator !=</code>. These overridden operators give new meaning to expressions that apply
+                        those operators to <code>MyList</code> instances. Specifically, the operators define equality of
+                        two <code>MyList&lt;T&gt;</code> instances as comparing each of the contained objects using
+                        their <code>Equals</code> methods. The following example uses the <code>==</code> operator to
+                        compare two <code>MyList&lt;int&gt;</code> instances.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+MyList&lt;<span class="code-keyword">int</span>&gt; a = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">int</span>&gt;();
+a.Add(1);
+a.Add(2);
+MyList&lt;<span class="code-keyword">int</span>&gt; b = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">int</span>&gt;();
+b.Add(1);
+b.Add(2);
+Console.WriteLine(a == b);  <span class="code-comment">// Outputs "True"</span>
+b.Add(3);
+Console.WriteLine(a == b);  <span class="code-comment">// Outputs "False"</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The first <code>Console.WriteLine</code> outputs <code>True</code> because the two lists contain
+                        the same number of objects with the same values in the same order. Had
+                        <code>MyList&lt;T&gt;</code> not defined <code>operator ==</code>, the first
+                        <code>Console.WriteLine</code> would have output <code>False</code> because <code>a</code> and
+                        <code>b</code> reference different <code>MyList&lt;int&gt;</code> instances.
+                    </p>
+                </article>
             </section>
 
             <section id="finalizers">
                 <header>
                     <h3>Finalizers</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A <em>finalizer</em> is a member that implements the actions required to finalize an instance of
+                        a class. Typically, a finalizer is needed to release unmanaged resources. Finalizers can't have
+                        parameters, they can't have accessibility modifiers, and they can't be invoked explicitly. The
+                        finalizer for an instance is invoked automatically during garbage collection. For more details,
+                        see the article on <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/destructors">finalizers</a>.
+                    </p>
+                    <p>
+                        The garbage collector is allowed wide latitude in deciding when to collect objects and run
+                        finalizers. Specifically, the timing of finalizer invocations isn't deterministic, and
+                        finalizers may be executed on any thread. For these and other reasons, classes should implement
+                        finalizers only when no other solutions are feasible.
+                    </p>
+                    <p>
+                        The <code>using</code> statement provides a better approach to object destruction.
+                    </p>
+                </article>
             </section>
 
             <section id="expressions">
                 <header>
                     <h3>Expressions</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        <em>Expressions</em> are constructed from <em>operands</em> and <em>operators</em>. The
+                        operators of an expression indicate which operations to apply to the operands. Examples of
+                        operators include <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and
+                        <code>new</code>. Examples of operands include literals, fields, local variables, and
+                        expressions.
+                    </p>
+                    <p>
+                        When an expression contains multiple operators, the <em>precedence</em> of the operators
+                        controls the order in which the individual operators are evaluated. For example, the expression
+                        <code>x + y * z</code> is evaluated as <code>x + (y * z)</code> because the <code>*</code>
+                        operator has higher precedence than the <code>+</code> operator.
+                    </p>
+                    <p>
+                        When an operand occurs between two operators with the same precedence, the
+                        <em>associativity</em> of the operators controls the order in which the operations are
+                        performed:
+                    </p>
+                    <ul>
+                        <li>Except for the assignment and null-coalescing operators, all binary operators are
+                            <em>left-associative</em>, meaning that operations are performed from left to right. For
+                            example, <code>x + y + z</code> is evaluated as <code>(x + y) + z</code>.</li>
+                        <li>The assignment operators, the null-coalescing <code>??</code> and <code>??=</code>
+                            operators, and the conditional operator <code>?:</code> are <em>right-associative</em>,
+                            meaning that operations are performed from right to left. For example,
+                            <code>x = y = z</code> is evaluated as <code>x = (y = z)</code>.</li>
+                    </ul>
+                    <p>
+                        Precedence and associativity can be controlled using parentheses. For example,
+                        <code>x + y * z</code> first multiplies <code>y</code> by <code>z</code> and then adds the
+                        result to <code>x</code>, but <code>(x + y) * z</code> first adds <code>x</code> and
+                        <code>y</code> and then multiplies the result by <code>z</code>.
+                    </p>
+                    <p>
+                        Most operators can be <em><a
+                                href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading">overloaded</a></em>.
+                        Operator overloading permits user-defined operator implementations to be specified for
+                        operations where one or both of the operands are of a user-defined class or struct type.
+                    </p>
+                    <p>
+                        C# provides a number of operators to perform <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators">arithmetic</a>,
+                        <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators">logical</a>,
+                        <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators">bitwise
+                            and shift</a> operations and <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/equality-operators">equality</a>
+                        and <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators">order</a>
+                        comparisons.
+                    </p>
+                    <p>
+                        For the complete list of C# operators ordered by precedence level, see <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/">C#
+                            operators</a>.
+                    </p>
+                </article>
             </section>
 
             <section id="statements">
                 <header>
                     <h3>Statements</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        The actions of a program are expressed using statements. C# supports several different kinds of
+                        statements, a number of which are defined in terms of embedded statements.
+                    </p>
+                    <ul>
+                        <li>A <em>block</em> permits multiple statements to be written in contexts where a single
+                            statement is allowed. A block consists of a list of statements written between the
+                            delimiters <code>{</code> and <code>}</code>.</li>
+                        <li><em>Declaration statements</em> are used to declare local variables and constants.</li>
+                        <li><em>Expression statements</em> are used to evaluate expressions. Expressions that can be
+                            used as statements include method invocations, object allocations using the <code>new</code>
+                            operator, assignments using <code>=</code> and the compound assignment operators, increment
+                            and decrement operations using the <code>++</code> and <code>--</code> operators and
+                            <code>await</code> expressions.</li>
+                        <li><em>Selection statements</em> are used to select one of a number of possible statements for
+                            execution based on the value of some expression. This group contains the <code>if</code> and
+                            <code>switch</code> statements.</li>
+                        <li><em>Iteration statements</em> are used to execute repeatedly an embedded statement. This
+                            group contains the <code>while</code>, <code>do</code>, <code>for</code>, and
+                            <code>foreach</code> statements.</li>
+                        <li><em>Jump statements</em> are used to transfer control. This group contains the
+                            <code>break</code>, <code>continue</code>, <code>goto</code>, <code>throw</code>,
+                            <code>return</code>, and <code>yield</code> statements.</li>
+                        <li>The <code>try</code>...<code>catch</code> statement is used to catch exceptions that occur
+                            during execution of a block, and the <code>try</code>...<code>finally</code> statement is
+                            used to specify finalization code that is always executed, whether an exception occurred or
+                            not.</li>
+                        <li>The <code>checked</code> and <code>unchecked</code> statements are used to control the
+                            overflow-checking context for integral-type arithmetic operations and conversions.</li>
+                        <li>The <code>lock</code> statement is used to obtain the mutual-exclusion lock for a given
+                            object, execute a statement, and then release the lock.</li>
+                        <li>The <code>using</code> statement is used to obtain a resource, execute a statement, and then
+                            dispose of that resource.</li>
+                    </ul>
+                    <p>
+                        The following lists the kinds of statements that can be used:
+                    </p>
+                    <ul>
+                        <li>Local variable declaration.</li>
+                        <li>Local constant declaration.</li>
+                        <li>Expression statement.</li>
+                        <li><code>if</code> statement.</li>
+                        <li><code>switch</code> statement.</li>
+                        <li><code>while</code> statement.</li>
+                        <li><code>do</code> statement.</li>
+                        <li><code>for</code> statement.</li>
+                        <li><code>foreach</code> statement.</li>
+                        <li><code>break</code> statement.</li>
+                        <li><code>continue</code> statement.</li>
+                        <li><code>goto</code> statement.</li>
+                        <li><code>return</code> statement.</li>
+                        <li><code>yield</code> statement.</li>
+                        <li><code>throw</code> statements and <code>try</code> statements.</li>
+                        <li><code>checked</code> and <code>unchecked</code> statements.</li>
+                        <li><code>lock</code> statement.</li>
+                        <li><code>using</code> statement.</li>
+                    </ul>
+                </article>
             </section>
 
         </section>
