@@ -2089,49 +2089,454 @@ Console.WriteLine(a == b);  <span class="code-comment">// Outputs "False"</span>
                 <header>
                     <h3>Arrays, Collections and LINQ</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        C# and .NET provide many different collection types. Arrays have syntax defined by the language.
+                        Generic collection types are listed in the <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic">System.Collections.Generic</a>
+                        namespace. Specialized collections include <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.span-1">System.Span&lt;T&gt;</a>
+                        for accessing continuous memory on the stack frame, and <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.memory-1">System.Memory&lt;T&gt;</a>
+                        for accessing continuous memory on the managed heap. All collections, including arrays, <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.span-1">Span&lt;T&gt;</a>, and <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.memory-1">Memory&lt;T&gt;</a> share
+                        a unifying principle for iteration. You use the <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1">System.Collections.Generic.IEnumerable&lt;T&gt;</a>
+                        interface. This unifying principle means that any of the collection types can be used with LINQ
+                        queries or other algorithms. You write methods using <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
+                        and those algorithms work with any collection.
+                    </p>
+                </article>
             </section>
 
             <section id="arrays">
                 <header>
                     <h3>Arrays</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        An <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/"><em><strong>array</strong></em></a>
+                        is a data structure that contains a number of variables that are accessed through computed
+                        indices. The variables contained in an array, also called the <em><strong>elements</strong></em>
+                        of the array, are all of the same type. This type is called the <em><strong>element
+                                type</strong></em> of the array.
+                    </p>
+                    <p>
+                        Array types are reference types, and the declaration of an array variable simply sets aside
+                        space for a reference to an array instance. Actual array instances are created dynamically at
+                        runtime using the <code>new</code> operator. The <code>new</code> operation specifies the
+                        <em><strong>length</strong></em> of the new array instance, which is then fixed for the lifetime
+                        of the instance. The indices of the elements of an array range from <code>0</code> to
+                        <code>Length - 1</code>. The <code>new</code> operator automatically initializes the elements of
+                        an array to their default value, which, for example, is zero for all numeric types and
+                        <code>null</code> for all reference types.
+                    </p>
+                    <p>
+                        The following example creates an array of <code>int</code> elements, initializes the array, and
+                        prints out the contents of the array.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>[] a = <span class="code-keyword">new int</span>[10];
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; a.Length; i++)
+{
+    a[i] = i * i;
+}
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; a.Length; i++)
+{
+    Console.WriteLine(<span class="code-string">$"a[</span>{i}<span class="code-string">] = </span>{a[i]}<span class="code-string">"</span>);
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        This example creates and operates on a <em><strong>single-dimensional array</strong></em>. C#
+                        also supports <em><strong>multi-dimensional arrays</strong></em>. The number of dimensions of an
+                        array type, also known as the <em><strong>rank</strong></em> of the array type, is one plus the
+                        number of commas written between the square brackets of the array type. The following example
+                        allocates a single-dimensional, a two-dimensional, and a three-dimensional array, respectively.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>[] a1 = <span class="code-keyword">new int</span>[10];
+<span class="code-keyword">int</span>[,] a2 = <span class="code-keyword">new int</span>[10, 5];
+<span class="code-keyword">int</span>[,,] a3 = <span class="code-keyword">new int</span>[10, 5, 2];
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The <code>a1</code> array contains 10 elements, the <code>a2</code> array contains 50 (10 × 5)
+                        elements, and the <code>a3</code> array contains 100 (10 × 5 × 2) elements. The element type of
+                        an array can be any type, including an array type. An array with elements of an array type is
+                        sometimes called a <em><strong>jagged array</strong></em> because the lengths of the element
+                        arrays don't all have to be the same. The following example allocates an array of arrays of
+                        <code>int</code>:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>[][] a = <span class="code-keyword">new int</span>[3][];
+a[0] = <span class="code-keyword">new int</span>[10];
+a[1] = <span class="code-keyword">new int</span>[5];
+a[2] = <span class="code-keyword">new int</span>[20];
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The first line creates an array with three elements, each of type <code>int[]</code> and each
+                        with an initial value of <code>null</code>. The next lines then initialize the three elements
+                        with references to individual array instances of varying lengths.
+                    </p>
+                    <p>
+                        The <code>new</code> operator permits the initial values of the array elements to be specified
+                        using an <em><strong>array initializer</strong></em>, which is a list of expressions written
+                        between the delimiters <code>{</code> and <code>}</code>. The following example allocates and
+                        initializes an <code>int[]</code> with three elements.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>[] a = <span class="code-keyword">new int</span>[] {1, 2, 3 };
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The length of the array is inferred from the number of expressions between <code>{</code> and
+                        <code>}</code>. Local variable and field declarations can be shortened further such that the
+                        array type doesn't have to be restated.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>[] a = {1, 2, 3 };
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        Both of the previous examples are equivalent to the following code:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">int</span>[] t = <span class="code-keyword">new int</span>[3];
+t[0] = 1;
+t[1] = 2;
+t[2] = 3
+<span class="code-keyword">int</span>[] a = t;
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The <code>foreach</code> statement can be used to enumerate the elements of any collection. The
+                        following code enumerates the array from the preceding example:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">foreach</span> (<span class="code-keyword">int</span> item <span class="code-keyword">in</span> a)
+{
+    Console.WriteLine(item);
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        The <code>foreach</code> statement uses the <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
+                        interface, so can work with any collection.
+                    </p>
+                </article>
             </section>
 
             <section id="string-interpolation">
                 <header>
                     <h3>String Interpolation</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        C# <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated"><em><strong>string
+                                    interpolation</strong></em></a> enables you to format strings by defining
+                        expressions whose results are placed in a format string. For example, the following example
+                        prints the temperature on a given day from a set of weather data:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+Console.WriteLine(<span class="code-string">$"The low and high temperature on</span> {weatherData.Date:MM-DD-YYYY}<span class="code-string">"</span>);
+Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTemp} <span class="code-string">and</span> {weatherData.HighTemp}<span class="code-string">."</span>);
+<span class="code-comment">// Output (similar to):</span>
+<span class="code-comment">// The low and high temperature on 08-11-2020</span>
+<span class="code-comment">//     was 5 and 30</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        An interpolated string is declared using the <code>$</code> token. String interpolation
+                        evaluates the expressions between <code>{</code> and <code>}</code>, then converts the result to
+                        a <code>string</code>, and replaces the text between the brackets with the string result of the
+                        expression. The <code>:</code> in the first expression,
+                        <code>{weatherData.Data:MM-DD-YYYY}</code> specifies the <em>format string</em>. In the
+                        preceding example, it specifies that the date should be printed in "MM-DD-YYYY" format.
+                    </p>
+                </article>
             </section>
 
             <section id="pattern-matching">
                 <header>
                     <h3>Pattern Matching</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        The C# language provides <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching"><em><strong>pattern
+                                    matching</strong></em></a> expressions to query the state of an object and execute
+                        code based on that state. You can inspect types and the values of properties and fields to
+                        determine which action to take. The <code>switch</code> expression is the primary expression for
+                        pattern matching.
+                    </p>
+                </article>
             </section>
 
             <section id="delegates-and-llambda-expressions">
                 <header>
                     <h3>Delegates and Llambda Expressions</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        A <a href="https://docs.microsoft.com/en-us/dotnet/csharp/delegates-overview"><em><strong>delegate
+                                    type</strong></em></a> represents references to methods with a particular parameter
+                        list and return type. Delegates make it possible to treat methods as entities that can be
+                        assigned to variables and passed as parameters. Delegates are similar to the concept of function
+                        pointers found in some other languages. Unlike function pointers, delegates are object-oriented
+                        and type-safe.
+                    </p>
+                    <p>
+                        The following example declares and uses a delegate type named <code>Function</code>.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">delegate double</span> <span class="code-title">Function</span>(<span class="code-keyword">double</span> x);
+
+<span class="code-keyword">class</span> <span class="code-title">Multiplier</span>
+{
+    <span class="code-keyword">double</span> _factor;
+
+    <span class="code-keyword">public</span> <span class="code-title">Multiplier</span>(<span class="code-keyword">double</span> factor) => _factor = factor;
+
+    <span class="code-keyword">public double</span> <span class="code-title">Multiply</span>(<span class="code-keyword">double</span> x) => x * _factor;
+}
+
+<span class="code-keyword">class</span> <span class="code-title">DelegateExample</span>
+{
+    <span class="code-keyword">static double</span>[] <span class="code-title">Apply</span>(<span class="code-keyword">double</span>[] a, Function f)
+    {
+        <span class="code-keyword">var</span> result = <span class="code-keyword">new double</span>[a.Length];
+        <span class="code-keyword">for (<span class="code-keyword">int</span> i = 0; i &lt; a.Length; i++) result[i] = f(a[i]);
+        <span class="code-keyword">return</span> result;
+    }
+
+    <span class="code-keyword">public static void</span> <span class="code-title">Main</span>()
+    {
+        <span class="code-keyword">double</span>[] a = { 0.0, 0.5, 1.0 };
+        <span class="code-keyword">double</span> sqaures = Apply(a, (x) => x * x);
+        <span class="code-keyword">double</span> sines = Apply(a, Math.Sin);
+        Multiplier m = <span class="code-keyword">new</span> Multiplier(2.0);
+        <span class="code-keyword">double</span>[] doubles = Apply(a, m.Multiply);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        An instance of the <code>Function</code> delegate type can reference any method that takes a
+                        <code>double</code> argument and returns a <code>double</code> value. The <code>Apply</code>
+                        method applies a given <code>Function</code> to the elements of a <code>double[]</code>,
+                        returning a <code>double[]</code> with the results. In the <code>Main</code> method,
+                        <code>Apply</code> is used to apply three different functions to a <code>double[]</code>.
+                    </p>
+                    <p>
+                        A delegate can reference either a static method (such as <code>Square</code> or
+                        <code>Math.Sin</code> in the previous example) or an instance method (such as
+                        <code>m.Multiply</code> in the previous example). A delegate that references an instance method
+                        also references a particular object, and when the instance method is invoked through the
+                        delegate, that object becomes <code>this</code> in the invocation.
+                    </p>
+                    <p>
+                        Delegates can also be created using anonymous functions, which are "inline methods" that are
+                        created when declared. Anonymous functions can see the local variables of the surrounding
+                        methods. The following example doesn't create a class:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">double</span>[] doubles = Apply(a, (<span class="code-keyword">double</span> x) => x * 2.0);
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        A delegate doesn't know or care about the class of the method it references. All that matters is
+                        that the referenced method has the same parameters and return type as the delegate.
+                    </p>
+                </article>
             </section>
 
             <section id="async-await">
                 <header>
                     <h3>Async / Await</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        C# supports asynchronous programs with two keywords: <code>async</code> and <code>await</code>.
+                        You add the <code>async</code> modifier to a method declaration to declare the method is
+                        asynchronous. The <code>await</code> operator tells the compiler to asynchronously await for a
+                        result to finish. Control is returned to the caller, and the method returns a structure that
+                        manages the state of the asynchronous work. The structure is typically a <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">System.Threading.Tasks.Task&lt;TResult&gt;</a>,
+                        but can be any type that supports the awaiter pattern. These features enable you to write code
+                        that reads as its synchronous counterpart, but executes asynchronously. For example, the
+                        following code downloads the home page for <a href="https://docs.microsoft.com/en-us/">Microsoft
+                            docs</a>:
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public async</span> Task&lt;<span class="code-keyword">int</span>&gt; <span class="code-title">RetrieveDocsHomePage</span>()
+{
+    <span class="code-keyword">var</span> client = <span class="code-keyword">new</span> HttpClient();
+    <span class="code-keyword">byte</span>[] content = <span class="code-keyword">await</span> client.GetByteArrayAsync(<span class="code-string">"https://docs.microsoft.com/"</span>);
+
+    Console.WriteLine(<span class="code-string">$"</span>{<span class="code-keyword">nameof</span>(RetrieveDocsHomePage)}<span class="code-string">: Finished downloading."</span>);
+    <span class="code-keyword">return</span> content.Length;
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        This small sample shows the major features for asynchronous programming:
+                    </p>
+                    <ul>
+                        <li>The method declaration includes the <code>async</code> modifier.</li>
+                        <li>The body of the method <code>await</code>s the return of the <code>GetByteArrayAsync</code>
+                            method.</li>
+                        <li>The type specified in the <code>return</code> statement matches the type argument in the
+                            <code>Task&lt;T&gt;</code> declaration for the method. (A method that returns a
+                            <code>Task</code> would use <code>return</code> statements without any argument).</li>
+                    </ul>
+                </article>
             </section>
 
             <section id="attributes">
                 <header>
                     <h3>Attributes</h3>
                 </header>
-                <article></article>
+                <article>
+                    <p>
+                        Types, members, and other entities in a C# program support modifiers that control certain
+                        aspects of their behavior. For example, the accessibility of a method is controlled using the
+                        <code>public</code>, <code>protected</code>, <code>internal</code>, and <code>private</code>
+                        modifiers. C# generalizes this capability such that user-defined types of declarative
+                        information can be attached to program entities and retrieved at run-time. Programs specify this
+                        additional declarative information by defining and using <a
+                            href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/"><em><strong>attributes</strong></em></a>.
+                    </p>
+                    <p>
+                        The following example declares a <code>HelpAttribute</code> attribute that can be placed on
+                        program entities to provide links to their associated documentation.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+<span class="code-keyword">public class</span> <span class="code-title">HelpAttribute</span> : <span class="code-title">Attribute</span>
+{
+    <span class="code-keyword">string</span> _url;
+    <span class="code-keyword">string</span> _topic;
+
+    <span class="code-keyword">public</span> <span class="code-title">HelpAttribute</span>(<span class="code-keyword">string</span> url) => _url = url;
+
+    <span class="code-keyword">public string</span> Url => _url;
+
+    <span class="code-keyword">public string</span> Topic
+    {
+        <span class="code-keyword">get</span> => _topic;
+        <span class="code-keyword">set</span> => _topic = <span class="code-keyword">value</span>;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        All attribute classes derive from the <a
+                            href="https://docs.microsoft.com/en-us/dotnet/api/system.attribute">Attribute</a> base class
+                        provided by the .NET library. Attributes can be applied by giving their name, along with any
+                        arguments, inside square brackets just before the associated declaration. If an attribute’s name
+                        ends in <code>Attribute</code>, that part of the name can be omitted when the attribute is
+                        referenced. For example, the <code>HelpAttribute</code> can be used as follows.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+[<span class="code-title">Help</span>(<span class="code-string">"https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/features"</span>)]
+<span class="code-keyword">public class</span> <span class="code-title">Widget</span>
+{
+    [<span class="code-title">Help</span>(<span class="code-string">"https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/features"</span>,
+    <span class="code-title">Topic</span> = <span class="code-string">"Display"</span>)]
+    <span class="code-keyword">public void</span> <span class="code-title">Display</span>(<span class="code-keyword">string</span> text) { }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>
+                        This example attaches a <code>HelpAttribute</code> to the <code>Widget</code> class. It adds
+                        another <code>HelpAttribute</code> to the <code>Display</code> method in the class. The public
+                        constructors of an attribute class control the information that must be provided when the
+                        attribute is attached to a program entity. Additional information can be provided by referencing
+                        public read-write properties of the attribute class (such as the reference to the
+                        <code>Topic</code> property previously).
+                    </p>
+                    <p>
+                        The metadata defined by attributes can be read and manipulated at runtime using reflection. When
+                        a particular attribute is requested using this technique, the constructor for the attribute
+                        class is invoked with the information provided in the program source, and the resulting
+                        attribute instance is returned. If additional information was provided through properties, those
+                        properties are set to the given values before the attribute instance is returned.
+                    </p>
+                    <p>
+                        The following code sample demonstrates how to get the <code>HelpAttribute</code> instances
+                        associated to the <code>Widget</code> class and its <code>Display</code> method.
+                    </p>
+                    <div>
+                        <pre>
+                            <code>
+Type widgetType = <span class="code-keyword">typeof</span>(Widget);
+
+<span class="code-keyword">object</span>[] widgetClassAttributes = widgetType.GetCustomAttributes(<span class="code-keyword">typeof</span>(HelpAttribute), <span class="code-title">false</span>);
+
+<span class="code-keyword">if</span> (widgetClassAttributes.Length &gt; 0)
+{
+    HelpAttribute attr = (HelpAttribute)widgetClassAttributes[0];
+    Console.WriteLine(<span class="code-string">$"Widget class help URL :</span> {attr.URL} <span class="code-string">- Related topic :</span> {attr.Topic}<span class="code-string">"</span>);
+}
+
+System.Reflection.MethodInfo displayMethod = widgetType.GetMethod(<span class="code-keyword">nameof</span>(Widget.Display));
+
+<span class="code-keyword">object</span>[] displayMethodAttributes = displayMethod.GetCustomAttributes(<span class="code-keyword">typeof</span>(HelpAttribute), <span class="code-title">false</span>);
+
+<span class="code-keyword">if</span> (displayMethodAttributes.Length &gt; 0)
+{
+    HelpAttribute attr = (HelpAttribute)displayMethodAttributes[0];
+    Console.WriteLine(<span class="code-string">$"Display method help URL :</span> {attr.URL} <span class="code-string">- Related topic :</span> {attr.Topic}<span class="code-string">"</span>);
+}
+                            </code>
+                        </pre>
+                    </div>
+                </article>
             </section>
 
         </section>
