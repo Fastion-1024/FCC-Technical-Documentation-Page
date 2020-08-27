@@ -36,4 +36,37 @@ p {
 
 }
 
+code {
+    background-color: #f2f2f2;
+    padding: 0.2em;
+}
+
+.code-block {
+    display: block;
+    background-color: #f2f2f2;
+    border: 0.15em solid #e2e2e2e2;    
+    border-radius: 0.5em;
+    padding: 0 1em;
+    overflow-x: auto;
+}
+.code-block pre {
+    margin: 0;
+}
+
+.code-keyword {
+    color: #0101fd;
+}
+
+.code-title {
+    color: #007d9a;
+}
+
+.code-string {
+    color: #a31515;
+}
+
+.code-comment {
+    color: #008000;
+}
+
 
