@@ -132,7 +132,7 @@
                 <article>
                     <p>The "Hello, World" program is traditionally used to introduce a programming language. Here it is
                         in C#:</p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">using</span> System;
@@ -329,7 +329,7 @@
                         and <em>unboxing operations</em>. In the following example, an <code>int</code> value is
                         converted to <code>object</code> and back again to <code>int</code>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span> i = 123;
@@ -416,7 +416,7 @@
                     <p>
                         As a small example, consider an assembly that contains the following code:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">using</span> System;
@@ -488,7 +488,7 @@
                         simply by referencing that assembly when compiling the program. For example, this program uses
                         the <code>Acme.Collections.Stack</code> class from the <code>acme.dll</code> assembly:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">using</span> System;
@@ -567,7 +567,7 @@
                     <p>
                         The following code shows a declaration of a simple class named <code>Point</code>:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">Point</span>
@@ -586,7 +586,7 @@
                         instance. The following statements create two <code>Point</code> objects and store references to
                         those objects in two variables:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">var</span> p1 = <span class="code-keyword">new</span> Point(0, 0);
@@ -615,7 +615,7 @@
                         following example, the type parameters of <code>Pair</code> are <code>TFirst</code> and
                         <code>TSecond</code>:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">Pair</span>&lt;<span class="code-title">TFirst</span>, <span class="code-title">TSecond</span>&gt;
@@ -634,7 +634,7 @@
                         Struct, interface, and delegate types can also be generic. When the generic class is used, type
                         arguments must be provided for each of the type parameters:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">var</span> pair = <span class="code-keyword">new</span> Pair&lt;<span class="code-keyword">int</span>, <span class="code-keyword">string</span>&gt;(1, <span class="code-string">"two"</span>);
@@ -662,7 +662,7 @@
                         <code>Point3D</code> is <code>Point</code>. From the first example, the base class of
                         <code>Point</code> is <code>object</code>:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">Point3D</span> : <span class="code-title">Point</span>
@@ -692,7 +692,7 @@
                         example, given the previous class declarations, a variable of type <code>Point</code> can
                         reference either a <code>Point</code> or a <code>Point3D</code>:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 Point a = <span class="code-keyword">new</span> Point(10, 20);
@@ -718,7 +718,7 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                         You can't derive other <code>struct</code> types from a <code>struct</code> type. They're
                         implicitly sealed.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public struct</span> Point
@@ -752,7 +752,7 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                         the interface <code>IComboBox</code> inherits from both <code>ITextBox</code> and
                         <code>IListBox</code>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">interface</span> <span class="code-title">IControl</span>
@@ -778,7 +778,7 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                         Classes and structs can implement multiple interfaces. In the following example, the class
                         <code>EditBox</code> implements both <code>IControl</code> and <code>IDataBound</code>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">interface</span> <span class="code-title">IDataBound</span>
@@ -798,7 +798,7 @@ Point b = <span class="code-keyword">new</span> Point3D(10, 20, 30);
                         When a class or struct implements a particular interface, instances of that class or struct can
                         be implicitly converted to that interface type. For example
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 EditBox editBox = <span class="code-keyword">new</span> EditBox();
@@ -821,7 +821,7 @@ IDataBound dataBound = editBox;
                         type defines a set of constant values. The following <code>enum</code> declares constants that
                         define different root vegetables:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public enum</span> SomeRootVegetables
@@ -838,7 +838,7 @@ IDataBound dataBound = editBox;
                         declaration declares a set of flags for the four seasons. Any combination of the seasons may be
                         applied, including an <code>All</code> value that includes all seasons:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 [<span class="code-title">Flags</span>]
@@ -857,7 +857,7 @@ IDataBound dataBound = editBox;
                     <p>
                         The following example shows declarations of both the preceding enums:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">var</span> turnip = SomeRootVegetables.Turnip;
@@ -894,7 +894,7 @@ IDataBound dataBound = editBox;
                             href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">nullable reference
                             types</a>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>? optionalInt = <span class="code-keyword">default</span>;
@@ -919,7 +919,7 @@ optionalText = <span class="code-string">"Hello World."</span>;
                         You instantiate a tuple by declaring the types and names of the members between <code>(</code>
                         and <code>)</code>, as shown in the following example:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 (<span class="code-keyword">double</span> Sum, <span class="code-keyword">int</span> Count) t2 = (4.5, 3);
@@ -1032,7 +1032,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                         copy of the <code>Black</code>, <code>White</code>, <code>Red</code>, <code>Green</code>, and
                         <code>Blue</code> static fields:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">Color</span>
@@ -1096,7 +1096,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                         When a method body is a single expression, the method can be defined using a compact expression
                         format, as shown in the following example:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public override</span> <span class="code-title">ToString</span>() => <span class="code-string">"This is an object"</span>;
@@ -1134,7 +1134,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                         reference parameter is declared with the ref modifier. The following example shows the use of
                         <code>ref</code> parameters.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">static void</span> <span class="code-title">Swap</span>(<span class="code-keyword">ref int</span> x, <span class="code-keyword">ref int</span> y)
@@ -1160,7 +1160,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                         The following example shows the use of <code>out</code> parameters using the syntax introduced
                         in C# 7.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">static void</span> <span class="code-title">Divide</span>(<span class="code-keyword">int</span> x, <span class="code-keyword">int</span> y, <span class="code-keyword">out int</span> result, <span class="code-keyword">out int</span> remainder)
@@ -1185,7 +1185,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                             href="https://docs.microsoft.com/en-us/dotnet/api/system.console">System.Console</a> class
                         are good examples of parameter array usage. They're declared as follows.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">Console</span>
@@ -1204,7 +1204,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
                         of the element type of the parameter array. In the latter case, an array instance is
                         automatically created and initialized with the given arguments. This example
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span> x, y, z;
@@ -1218,7 +1218,7 @@ Console.WriteLine(<span class="code-string">"x={0} y={1} z={2}"</span>, x, y, z)
                     <p>
                         is equivalent to writing the following.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span> x = 3, y = 4, z = 5;
@@ -1250,7 +1250,7 @@ Console.WriteLine(s, args);
                         variable <code>i</code> with an initial value of zero and a local variable <code>j</code> with
                         no initial value.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">class</span> <span class="code-title">Squares</span>
@@ -1303,7 +1303,7 @@ Console.WriteLine(s, args);
                     <p>
                         The following <code>Entity</code> class has both static and instance members.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">class</span> <span class="code-title">Entity</span>
@@ -1349,7 +1349,7 @@ Console.WriteLine(s, args);
                     <p>
                         The following example shows the use of the <code>Entity</code> class.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 Entity.SetNextSerialNo(1000);
@@ -1403,7 +1403,7 @@ Console.WriteLine(Entity.GetNextSerialNo());    <span class="code-comment">// Ou
                         nodes for constants, variable references, and arithmetic operations. (This example is similar
                         to, but not related to the expression tree types).
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public abstract class</span> <span class="code-title">Expression</span>
@@ -1477,7 +1477,7 @@ Console.WriteLine(Entity.GetNextSerialNo());    <span class="code-comment">// Ou
                         The previous four classes can be used to model arithmetic expressions. For example, using
                         instances of these classes, the expression <code>x + 3</code> can be represented as follows.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 Expression e = <span class="code-keyword">new</span> Operation(
@@ -1505,7 +1505,7 @@ Expression e = <span class="code-keyword">new</span> Operation(
                         The following program uses the <code>Expression</code> classes to evaluate the expression
                         <code>x * (y + 2)</code> for different values of <code>x</code> and <code>y</code>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 Expression e = <span class="code-keyword">new</span> Operation(
@@ -1544,7 +1544,7 @@ Console.WriteLine(e.Evaluate(vars));    <span class="code-comment">// "16.5</spa
                         comment for each invocation in the <code>UsageExample</code> method shows which method is
                         invoked.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">class</span> <span class="code-title">OverloadingExample</span>
@@ -1594,7 +1594,7 @@ Console.WriteLine(e.Evaluate(vars));    <span class="code-comment">// "16.5</spa
                         implements a growable list of objects. The class contains several examples of the most common
                         kinds of function members.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">MyList</span>&lt;<span class="code-title">T</span>&gt;
@@ -1701,7 +1701,7 @@ Console.WriteLine(e.Evaluate(vars));    <span class="code-comment">// "16.5</spa
                         operator. The following statements allocate two <code>MyList&lt;string&gt;</code> instances
                         using the constructor of the <code>MyList</code> class with and without the optional argument.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 MyList&lt;<span class="code-keyword">string</span>&gt; list1 = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
@@ -1753,7 +1753,7 @@ MyList&lt;<span class="code-keyword">string</span>&gt; list2 = <span class="code
                         <code>Capacity</code>, which are read-only and read-write, respectively. The following code is
                         an example of use of these properties:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 MyList&lt;<span class="code-keyword">string</span>&gt; names = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
@@ -1793,7 +1793,7 @@ names.Capacity = 100;     <span class="code-comment">// Invokes set accessor</sp
                         <code>int</code> parameter. The indexer makes it possible to index <code>MyList&lt;T&gt;</code>
                         instances with <code>int</code> values. For example:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 MyList&lt;<span class="code-keyword">string</span>&gt; names = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">string</span>&gt;();
@@ -1845,7 +1845,7 @@ names.Add(<span class="code-string">"Beth"</span>);
                         attaches an event handler to the <code>Changed</code> event of a
                         <code>MyList&lt;string&gt;</code>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">class</span> <span class="code-title">EventExample</span>
@@ -1897,7 +1897,7 @@ names.Add(<span class="code-string">"Beth"</span>);
                         their <code>Equals</code> methods. The following example uses the <code>==</code> operator to
                         compare two <code>MyList&lt;int&gt;</code> instances.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 MyList&lt;<span class="code-keyword">int</span>&gt; a = <span class="code-keyword">new</span> MyList&lt;<span class="code-keyword">int</span>&gt;();
@@ -2138,7 +2138,7 @@ Console.WriteLine(a == b);  <span class="code-comment">// Outputs "False"</span>
                         The following example creates an array of <code>int</code> elements, initializes the array, and
                         prints out the contents of the array.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>[] a = <span class="code-keyword">new int</span>[10];
@@ -2160,7 +2160,7 @@ Console.WriteLine(a == b);  <span class="code-comment">// Outputs "False"</span>
                         number of commas written between the square brackets of the array type. The following example
                         allocates a single-dimensional, a two-dimensional, and a three-dimensional array, respectively.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>[] a1 = <span class="code-keyword">new int</span>[10];
@@ -2177,7 +2177,7 @@ Console.WriteLine(a == b);  <span class="code-comment">// Outputs "False"</span>
                         arrays don't all have to be the same. The following example allocates an array of arrays of
                         <code>int</code>:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>[][] a = <span class="code-keyword">new int</span>[3][];
@@ -2198,7 +2198,7 @@ a[2] = <span class="code-keyword">new int</span>[20];
                         between the delimiters <code>{</code> and <code>}</code>. The following example allocates and
                         initializes an <code>int[]</code> with three elements.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>[] a = <span class="code-keyword">new int</span>[] {1, 2, 3 };
@@ -2210,7 +2210,7 @@ a[2] = <span class="code-keyword">new int</span>[20];
                         <code>}</code>. Local variable and field declarations can be shortened further such that the
                         array type doesn't have to be restated.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>[] a = {1, 2, 3 };
@@ -2220,7 +2220,7 @@ a[2] = <span class="code-keyword">new int</span>[20];
                     <p>
                         Both of the previous examples are equivalent to the following code:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">int</span>[] t = <span class="code-keyword">new int</span>[3];
@@ -2235,7 +2235,7 @@ t[2] = 3
                         The <code>foreach</code> statement can be used to enumerate the elements of any collection. The
                         following code enumerates the array from the preceding example:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">foreach</span> (<span class="code-keyword">int</span> item <span class="code-keyword">in</span> a)
@@ -2265,7 +2265,7 @@ t[2] = 3
                         expressions whose results are placed in a format string. For example, the following example
                         prints the temperature on a given day from a set of weather data:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 Console.WriteLine(<span class="code-string">$"The low and high temperature on</span> {weatherData.Date:MM-DD-YYYY}<span class="code-string">"</span>);
@@ -2319,7 +2319,7 @@ Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTem
                     <p>
                         The following example declares and uses a delegate type named <code>Function</code>.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">delegate double</span> <span class="code-title">Function</span>(<span class="code-keyword">double</span> x);
@@ -2373,7 +2373,7 @@ Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTem
                         created when declared. Anonymous functions can see the local variables of the surrounding
                         methods. The following example doesn't create a class:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">double</span>[] doubles = Apply(a, (<span class="code-keyword">double</span> x) => x * 2.0);
@@ -2404,7 +2404,7 @@ Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTem
                         following code downloads the home page for <a href="https://docs.microsoft.com/en-us/">Microsoft
                             docs</a>:
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public async</span> Task&lt;<span class="code-keyword">int</span>&gt; <span class="code-title">RetrieveDocsHomePage</span>()
@@ -2450,7 +2450,7 @@ Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTem
                         The following example declares a <code>HelpAttribute</code> attribute that can be placed on
                         program entities to provide links to their associated documentation.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 <span class="code-keyword">public class</span> <span class="code-title">HelpAttribute</span> : <span class="code-title">Attribute</span>
@@ -2479,7 +2479,7 @@ Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTem
                         ends in <code>Attribute</code>, that part of the name can be omitted when the attribute is
                         referenced. For example, the <code>HelpAttribute</code> can be used as follows.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 [<span class="code-title">Help</span>(<span class="code-string">"https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/features"</span>)]
@@ -2511,7 +2511,7 @@ Console.WriteLine(<span class="code-string">$"    was</span> {weatherData.LowTem
                         The following code sample demonstrates how to get the <code>HelpAttribute</code> instances
                         associated to the <code>Widget</code> class and its <code>Display</code> method.
                     </p>
-                    <div>
+                    <div class="code-block">
                         <pre>
                             <code>
 Type widgetType = <span class="code-keyword">typeof</span>(Widget);
