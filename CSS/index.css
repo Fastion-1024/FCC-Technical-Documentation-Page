@@ -109,14 +109,14 @@ code {
     display: none;
 }
 
-.nav-link-header {
+.nav-link {
     font-weight: 500;
     font-size: 1.1rem;
     display: block;
     color: black;
 }
 
-.nav-link-header:nth-child(n + 1) {
+.nav-link:nth-child(n + 1) {
     padding-top: 1em;
 }
 
@@ -137,7 +137,7 @@ code {
     color: #007d9a;
 }
 
-.nav-link {
+.nav-link-sub {
     display: block;
     color: black;
     
