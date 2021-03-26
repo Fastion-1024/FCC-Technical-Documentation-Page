@@ -12,7 +12,7 @@
 
 <body>
 
-    <nav class="navbar">
+    <nav id="navbar" class="navbar">
         <div class="nav-icon" onclick="expandCollapseNav()">
             <div></div>
         </div>
@@ -20,68 +20,69 @@
             <h1>A Tour of C#</h1>
         </header>
         <ul id="nav-list">
-            <li><a class="nav-link-header" href="#introduction">Introduction</a>
+            <li><a class="nav-link" href="#A_Tour_of_the_C#_Language">A Tour of the C# Language</a>
                 <ul>
-                    <li><a class="nav-link" href="#hello-world">Hello World</a></li>
-                    <li><a class="nav-link" href="#types-and-variables">Types & Variables</a></li>
-                    <li><a class="nav-link" href="#program-structure">Program Structure</a></li>
+                    <li><a class="nav-link-sub" href="#hello-world">Hello World</a></li>
+                    <li><a class="nav-link-sub" href="#types-and-variables">Types & Variables</a></li>
+                    <li><a class="nav-link-sub" href="#program-structure">Program Structure</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link-header" href="#types">Types</a>
+            <li><a class="nav-link" href="#Types">Types</a>
                 <ul>
-                    <li><a class="nav-link" href="#classes-and-objects">Classes and Objects</a></li>
-                    <li><a class="nav-link" href="#type-parameters">Type Parameters</a></li>
-                    <li><a class="nav-link" href="#base-classes">Base Classes</a></li>
-                    <li><a class="nav-link" href="#structs">Structs</a></li>
-                    <li><a class="nav-link" href="#interfaces">Interfaces</a></li>
-                    <li><a class="nav-link" href="#enums">Enums</a></li>
-                    <li><a class="nav-link" href="#nullable-types">Nullable Types</a></li>
-                    <li><a class="nav-link" href="#tuples">Tuples</a></li>
+                    <li><a class="nav-link-sub" href="#classes-and-objects">Classes and Objects</a></li>
+                    <li><a class="nav-link-sub" href="#type-parameters">Type Parameters</a></li>
+                    <li><a class="nav-link-sub" href="#base-classes">Base Classes</a></li>
+                    <li><a class="nav-link-sub" href="#structs">Structs</a></li>
+                    <li><a class="nav-link-sub" href="#interfaces">Interfaces</a></li>
+                    <li><a class="nav-link-sub" href="#enums">Enums</a></li>
+                    <li><a class="nav-link-sub" href="#nullable-types">Nullable Types</a></li>
+                    <li><a class="nav-link-sub" href="#tuples">Tuples</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link-header" href="#program-building-blocks">Program Building Blocks</a>
+            <li><a class="nav-link" href="#Program_Building_Blocks">Program Building Blocks</a>
                 <ul>
-                    <li><a class="nav-link" href="#members">Members</a></li>
-                    <li><a class="nav-link" href="#accessibility">Accessibility</a></li>
-                    <li><a class="nav-link" href="#fields">Fields</a></li>
-                    <li><a class="nav-link" href="#methods">Methods</a></li>
-                    <li><a class="nav-link" href="#parameters">Parameters</a></li>
-                    <li><a class="nav-link" href="#method-body-and-local-variables">Method Body and Local Variables</a>
+                    <li><a class="nav-link-sub" href="#members">Members</a></li>
+                    <li><a class="nav-link-sub" href="#accessibility">Accessibility</a></li>
+                    <li><a class="nav-link-sub" href="#fields">Fields</a></li>
+                    <li><a class="nav-link-sub" href="#methods">Methods</a></li>
+                    <li><a class="nav-link-sub" href="#parameters">Parameters</a></li>
+                    <li><a class="nav-link-sub" href="#method-body-and-local-variables">Method Body and Local Variables</a>
                     </li>
-                    <li><a class="nav-link" href="#static-and-instance-methods">Static and Instance Methods</a></li>
-                    <li><a class="nav-link" href="#virtual-override-and-abstract-methods">Virtual, Override and Abstract
+                    <li><a class="nav-link-sub" href="#static-and-instance-methods">Static and Instance Methods</a></li>
+                    <li><a class="nav-link-sub" href="#virtual-override-and-abstract-methods">Virtual, Override and Abstract
                             Methods</a></li>
-                    <li><a class="nav-link" href="#method-overloading">Method Overloading</a></li>
-                    <li><a class="nav-link" href="#other-function-members">Other Function Members</a></li>
-                    <li><a class="nav-link" href="#constructors">Constructors</a></li>
-                    <li><a class="nav-link" href="#properties">Properties</a></li>
-                    <li><a class="nav-link" href="#indexers">Indexers</a></li>
-                    <li><a class="nav-link" href="#events">Events</a></li>
-                    <li><a class="nav-link" href="#operators">Operators</a></li>
-                    <li><a class="nav-link" href="#finalizers">Finalizers</a></li>
-                    <li><a class="nav-link" href="#expressions">Expressions</a></li>
-                    <li><a class="nav-link" href="#statements">Statements</a></li>
+                    <li><a class="nav-link-sub" href="#method-overloading">Method Overloading</a></li>
+                    <li><a class="nav-link-sub" href="#other-function-members">Other Function Members</a></li>
+                    <li><a class="nav-link-sub" href="#constructors">Constructors</a></li>
+                    <li><a class="nav-link-sub" href="#properties">Properties</a></li>
+                    <li><a class="nav-link-sub" href="#indexers">Indexers</a></li>
+                    <li><a class="nav-link-sub" href="#events">Events</a></li>
+                    <li><a class="nav-link-sub" href="#operators">Operators</a></li>
+                    <li><a class="nav-link-sub" href="#finalizers">Finalizers</a></li>
+                    <li><a class="nav-link-sub" href="#expressions">Expressions</a></li>
+                    <li><a class="nav-link-sub" href="#statements">Statements</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link-header" href="#major-language-areas">Major Language Areas</a>
+            <li><a class="nav-link" href="#Major_Language_Areas">Major Language Areas</a>
                 <ul>
-                    <li><a class="nav-link" href="#arrays-collections-and-linq">Arrays, Collections and LINQ</a></li>
-                    <li><a class="nav-link" href="#arrays">Arrays</a></li>
-                    <li><a class="nav-link" href="#string-interpolation">String Interpolation</a></li>
-                    <li><a class="nav-link" href="#pattern-matching">Pattern Matching</a></li>
-                    <li><a class="nav-link" href="#delegates-and-llambda-expressions">Delegates and Llambda
+                    <li><a class="nav-link-sub" href="#arrays-collections-and-linq">Arrays, Collections and LINQ</a></li>
+                    <li><a class="nav-link-sub" href="#arrays">Arrays</a></li>
+                    <li><a class="nav-link-sub" href="#string-interpolation">String Interpolation</a></li>
+                    <li><a class="nav-link-sub" href="#pattern-matching">Pattern Matching</a></li>
+                    <li><a class="nav-link-sub" href="#delegates-and-llambda-expressions">Delegates and Llambda
                             Expressions</a></li>
-                    <li><a class="nav-link" href="#async-await">Async / Await</a></li>
-                    <li><a class="nav-link" href="#attributes">Attributes</a></li>
+                    <li><a class="nav-link-sub" href="#async-await">Async / Await</a></li>
+                    <li><a class="nav-link-sub" href="#attributes">Attributes</a></li>
                 </ul>
             </li>
+            <li><a class="nav-link" href="#Conclusion">Conclusion</a>
         </ul>
     </nav>
 
-    <main>
-        <section id="introduction">
+    <main id="main-doc">
+        <section id="A_Tour_of_the_C#_Language" class="main-section">
             <header>
-                <h2>A tour of the C# Language</h2>
+                <h2>A Tour of the C# Language</h2>
             </header>
             <article>
                 <p>C# (pronounced "See Sharp") is a modern, object-oriented, and type-safe programming language. C# has
@@ -533,13 +534,13 @@
 
         </section>
 
-        <section id="types">
+        <section id="Types" class="main-section">
             <header>
                 <h2>Types</h2>
             </header>
             <article></article>
 
-            <section id="classes-and-objects">
+            <section id="Classes_and_Objects" >
                 <header>
                     <h3>Classes and Objects</h3>
                 </header>
@@ -604,7 +605,7 @@
                 </article>
             </section>
 
-            <section id="type-parameters">
+            <section id="Type_Parameters">
                 <header>
                     <h3>Type Parameters</h3>
                 </header>
@@ -941,7 +942,7 @@ Console.WriteLine(<span class="code-string">$"Sum of </span>{t2.Count} <span cla
 
         </section>
 
-        <section id="program-building-blocks">
+        <section id="Program_Building_Blocks" class="main-section">
             <header>
                 <h2>Program Building Blocks</h2>
             </header>
@@ -2082,7 +2083,7 @@ Console.WriteLine(a == b);  <span class="code-comment">// Outputs "False"</span>
 
         </section>
 
-        <section id="major-language-areas">
+        <section id="Major_Language_Areas" class="main-section">
             <header>
                 <h2>Major Language Areas</h2>
             </header>
@@ -2544,12 +2545,20 @@ System.Reflection.MethodInfo displayMethod = widgetType.GetMethod(<span class="c
 
         </section>
 
+        <section id="Conclusion" class="main-section"> 
+            <header>
+                <h2>Conclusion</h2>
+            </header>
+        </section>
+            
+
     </main>
 
     <footer>
 
     </footer>
 
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     <script src="./JS/index.js"></script>
 
 </body>
