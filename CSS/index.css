@@ -42,6 +42,10 @@ ul {
     line-height: var(--default-line-spacing);
 }
 
+main {
+    margin-top: 6em;
+}
+
 /*------------Code---------------*/
 
 code {
@@ -82,11 +86,18 @@ code {
 /*------------Navbar---------------*/
 
 .navbar {
+    position: fixed;
+    background: white;
+    width: 100vw;
+    top: 0;
     text-align: center;
+    max-height: 40vh;
+    overflow-y: auto;
+    border-bottom: solid #e2e2e2e2 0.2em;
 }
 
 .navbar header {
-    margin: 1em
+    margin: 1em;
 }
 
 .navbar ul {
