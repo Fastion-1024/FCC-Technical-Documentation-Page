@@ -7,6 +7,7 @@
 h1 {
     font-family: var(--font-header);
     font-size: 2rem;
+    margin: 0;
 }
 
 h2 {
@@ -84,9 +85,17 @@ code {
     text-align: center;
 }
 
+.navbar header {
+    margin: 1em
+}
+
 .navbar ul {
     list-style-type: none;
     padding-left: 0;
+}
+
+#nav-list {
+    display: none;
 }
 
 .nav-link-header {
@@ -102,13 +111,16 @@ code {
 
 .navbar a:hover::before {
     content: "> ";
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #007d9a;
 }
 
 .navbar a:hover::after {
     content: " <";
+
+}
+
+.navbar a:hover::before,
+.navbar a:hover::after 
+{
     font-size: 1.3rem;
     font-weight: bold;
     color: #007d9a;
@@ -120,6 +132,32 @@ code {
     
 }
 
+/*------------Hamburger---------------*/
+.nav-icon {
+    width: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1em;
+}
+
+.nav-icon:after, 
+.nav-icon:before, 
+.nav-icon div {
+    background-color: black;
+    border-radius: 3px;
+    content: '';
+    display: block;
+    height: 5px;
+    margin: 7px 0;
+    transition: all .2s ease-in-out;
+}
+
+.nav-icon:hover:before,
+.nav-icon:hover:after,
+.nav-icon:hover div  {
+    background-color: #007d9a;
+}
 
 
 
