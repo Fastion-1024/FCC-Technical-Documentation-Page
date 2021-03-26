@@ -13,10 +13,13 @@
 <body>
 
     <nav class="navbar">
+        <div class="nav-icon" onclick="expandCollapseNav()">
+            <div></div>
+        </div>
         <header>
             <h1>A Tour of C#</h1>
         </header>
-        <ul>
+        <ul id="nav-list">
             <li><a class="nav-link-header" href="#introduction">Introduction</a>
                 <ul>
                     <li><a class="nav-link" href="#hello-world">Hello World</a></li>
@@ -2546,5 +2549,7 @@ System.Reflection.MethodInfo displayMethod = widgetType.GetMethod(<span class="c
     <footer>
 
     </footer>
+
+    <script src="./JS/index.js"></script>
 
 </body>
