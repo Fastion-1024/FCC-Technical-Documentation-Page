@@ -80,10 +80,46 @@ code {
 
 /*------------Navbar---------------*/
 
+.navbar {
+    text-align: center;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
 .nav-link-header {
     font-weight: 500;
     font-size: 1.1rem;
+    display: block;
+    color: black;
 }
+
+.nav-link-header:nth-child(n + 1) {
+    padding-top: 1em;
+}
+
+.navbar a:hover::before {
+    content: "> ";
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #007d9a;
+}
+
+.navbar a:hover::after {
+    content: " <";
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #007d9a;
+}
+
+.nav-link {
+    display: block;
+    color: black;
+    
+}
+
 
 
 
