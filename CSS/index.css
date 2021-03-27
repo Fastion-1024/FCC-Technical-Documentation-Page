@@ -43,8 +43,8 @@ ul {
 }
 
 main {
-    /* Margin added to account for navbar being fixed to top */
-    margin-top: 6em;
+    margin-left: 20em;
+    transition: all .2s ease-in-out;
 }
 
 /*------------Code---------------*/
@@ -89,17 +89,15 @@ code {
 .navbar {
     position: fixed;
     top: 0;
-    width: 100vw;
-    max-height: 40vh;
-    overflow-y: auto;
-    text-align: center;
-    background: white;
-    border-bottom: solid #e2e2e2e2 0.2em;
-    z-index: 1;
-}
-
-.navbar header {
-    margin: 1em;
+    left: 0;
+    width: 18em;
+    padding-left: 1em;
+    padding-top: 1em;
+    background-color: #f2f2f2;
+    border-right: .3em solid #e2e2e2e2;  
+    height: 100%;
+    transition: all .2s ease-in-out;
+    white-space: nowrap;
 }
 
 .navbar ul {
@@ -107,84 +105,82 @@ code {
     padding-left: 0;
 }
 
-#nav-list {
-    display: none;
-}
-
-/* This is the header for each nav section*/
-.nav-link {
-    font-weight: 500;
-    font-size: 1rem;
-    display: block;
+.nav-link,
+.nav-link-sub,
+.nav-link:visited,
+.nav-link-sub:visited {
     color: black;
 }
 
-/* All but the first nav-link class will gain some padding between them */
+.nav-link,
+.nav-link-sub {
+    display: block;
+}
+
+.nav-link {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 .nav-link:nth-child(n + 1) {
     padding-top: 1em;
 }
 
 .nav-link-sub {
-    font-size: 0.9rem;
-    display: block;
-    color: black;
+    font-size: 0.8rem;
 }
 
 /*------------Hamburger---------------*/
-.nav-icon {
+.hamburger-icon {
     width: 40px;
     position: absolute;
     top: 0;
     left: 0;
     margin: 1em;
+    margin-left: 16em;
+    z-index: 1;
+    transition: all .2s ease-in-out;
 }
 
-.nav-icon:after, 
-.nav-icon:before, 
-.nav-icon div {
+.hamburger-icon:after, 
+.hamburger-icon:before, 
+.hamburger-icon div {
     background-color: black;
     border-radius: 3px;
     content: '';
     display: block;
     height: 5px;
     margin: 7px 0;
-    transition: all .2s ease-in-out;
 }
 
-.nav-icon:hover:before,
-.nav-icon:hover:after,
-.nav-icon:hover div  {
-    background-color: #007d9a;
+#hamburger-menu {
+    display: none;
 }
 
-@media only screen and (min-width: 768px) {
+#hamburger-menu:checked + label .hamburger-icon {
+    margin-left: 1em;
+}
+
+#hamburger-menu:checked ~ .navbar {
+    width: 0;
+    border: none;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .navbar {
+        box-shadow: 0.4em 0.4em 1em rgba(0, 0, 0, 0.8);
+        box-shadow: 0.8em 0.8em 2em rgba(0, 0, 0, 0.5);
+    }
 
     main {
-        margin-left: 20em;
-        margin-top: 2em;
-    }
-    
-    .navbar {
-        min-width: 16em;
-        width: 18em;
-        height: 100%;
-        max-height: 100%;
-    }
-    
-
-    .navbar header {
-        text-align: left;
-        margin-left: 0;
+        margin-left: 1em;
     }
 
-    .navbar ul {
-        text-align: left;
+    #hamburger-menu:checked ~ .navbar {
+        box-shadow: none;
     }
-
-    .nav-icon {
-        display: none;
-    }
-    
 
 }
 
