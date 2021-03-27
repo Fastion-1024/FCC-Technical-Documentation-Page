@@ -98,6 +98,7 @@ code {
     height: 100%;
     transition: all .2s ease-in-out;
     white-space: nowrap;
+    overflow-y: auto;
 }
 
 .navbar ul {
@@ -133,7 +134,7 @@ code {
 /*------------Hamburger---------------*/
 .hamburger-icon {
     width: 40px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     margin: 1em;
@@ -165,6 +166,10 @@ code {
     width: 0;
     border: none;
     overflow: hidden;
+}
+
+#hamburger-menu:checked ~ main {
+    margin: 1em;
 }
 
 @media only screen and (max-width: 768px) {
