@@ -17,7 +17,7 @@ h2 {
 
 p {
     line-height: var(--default-line-spacing);
-    margin-left: 1em;
+    margin-left: 0em;
 }
 
 a {
@@ -43,6 +43,7 @@ ul {
 }
 
 main {
+    /* Margin added to account for navbar being fixed to top */
     margin-top: 6em;
 }
 
@@ -87,13 +88,14 @@ code {
 
 .navbar {
     position: fixed;
-    background: white;
-    width: 100vw;
     top: 0;
-    text-align: center;
+    width: 100vw;
     max-height: 40vh;
     overflow-y: auto;
+    text-align: center;
+    background: white;
     border-bottom: solid #e2e2e2e2 0.2em;
+    z-index: 1;
 }
 
 .navbar header {
@@ -109,38 +111,23 @@ code {
     display: none;
 }
 
+/* This is the header for each nav section*/
 .nav-link {
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     display: block;
     color: black;
 }
 
+/* All but the first nav-link class will gain some padding between them */
 .nav-link:nth-child(n + 1) {
     padding-top: 1em;
 }
 
-.navbar a:hover::before {
-    content: "> ";
-}
-
-.navbar a:hover::after {
-    content: " <";
-
-}
-
-.navbar a:hover::before,
-.navbar a:hover::after 
-{
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #007d9a;
-}
-
 .nav-link-sub {
+    font-size: 0.9rem;
     display: block;
     color: black;
-    
 }
 
 /*------------Hamburger---------------*/
@@ -168,6 +155,37 @@ code {
 .nav-icon:hover:after,
 .nav-icon:hover div  {
     background-color: #007d9a;
+}
+
+@media only screen and (min-width: 768px) {
+
+    main {
+        margin-left: 20em;
+        margin-top: 2em;
+    }
+    
+    .navbar {
+        min-width: 16em;
+        width: 18em;
+        height: 100%;
+        max-height: 100%;
+    }
+    
+
+    .navbar header {
+        text-align: left;
+        margin-left: 0;
+    }
+
+    .navbar ul {
+        text-align: left;
+    }
+
+    .nav-icon {
+        display: none;
+    }
+    
+
 }
 
 
