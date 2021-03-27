@@ -133,7 +133,7 @@ code {
 
 /*------------Hamburger---------------*/
 .hamburger-icon {
-    width: 40px;
+    width: 2em;
     position: fixed;
     top: 0;
     left: 0;
@@ -159,17 +159,18 @@ code {
 }
 
 #hamburger-menu:checked + label .hamburger-icon {
-    margin-left: 1em;
+    margin-left: 0.2em;
 }
 
 #hamburger-menu:checked ~ .navbar {
+    padding-left: 2.4em;
     width: 0;
     border: none;
     overflow: hidden;
 }
 
 #hamburger-menu:checked ~ main {
-    margin: 1em;
+    margin: 1em 1em 1em 2.6em;
 }
 
 @media only screen and (max-width: 768px) {
